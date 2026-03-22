@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Trophy, Gamepad2, Wallet, Users, Gift, ChevronRight, Star, Flame, Zap, Shield, Sparkles, Play, ArrowRight, TrendingUp, Crown, Target } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { gameService, leaderboardService } from '../services/api';
+import WelcomePopup from '../components/WelcomePopup';
 import toast from 'react-hot-toast';
 
 const Home = () => {
@@ -12,6 +13,27 @@ const Home = () => {
   const [games, setGames] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showWelcome, setShowWelcome] = useState(false);
+  
+  useEffect(() => {
+    const hasSeenWelcome = localStorage.getItem('hasSeenWelcome');
+    if (!hasSeenWelcome) {
+      const timer = setTimeout(() => {
+        setShowWelcome(true);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  const handleWelcomeClose = () => {
+    setShowWelcome(false);
+    localStorage.setItem('hasSeenWelcome', 'true');
+  };
+
+  const handleExplore = () => {
+    handleWelcomeClose();
+    navigate('/dashboard/games');
+  };
 
   useEffect(() => {
     fetchPublicData();
@@ -59,8 +81,18 @@ const Home = () => {
   };
 
   return (
-    <div className="w-full max-w-[1400px] mx-auto space-y-6">
-      
+    <>
+      <AnimatePresence>
+        {showWelcome && (
+          <WelcomePopup 
+            onClose={handleWelcomeClose} 
+            onExplore={handleExplore}
+          />
+        )}
+      </AnimatePresence>
+
+      <div className="w-full max-w-[1400px] mx-auto space-y-6">
+        
       {/* Premium Casino Hero Section */}
       <section className="relative overflow-hidden rounded-3xl">
         {/* Background Layers */}
@@ -497,7 +529,8 @@ const Home = () => {
         </div>
         <p className="text-[11px] sm:text-xs text-gray-600">IndiaPlay v1.0.0 • Made with ❤️ in India</p>
       </footer>
-    </div>
+      </div>
+    </>
   );
 };
 
