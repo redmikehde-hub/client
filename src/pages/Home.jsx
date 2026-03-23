@@ -6,6 +6,16 @@ import { useAuth } from '../context/AuthContext';
 import { gameService, leaderboardService } from '../services/api';
 import WelcomePopup from '../components/WelcomePopup';
 import toast from 'react-hot-toast';
+import { getGameRoute } from '../utils/gameRoutes';
+
+const demoWinners = [
+  { id: 'demo-1', name: 'Aarav', gamesWon: 128, totalWinnings: 245000 },
+  { id: 'demo-2', name: 'Priya', gamesWon: 116, totalWinnings: 218000 },
+  { id: 'demo-3', name: 'Rahul', gamesWon: 103, totalWinnings: 196000 },
+  { id: 'demo-4', name: 'Sneha', gamesWon: 98, totalWinnings: 174000 },
+  { id: 'demo-5', name: 'Vikram', gamesWon: 91, totalWinnings: 162000 },
+  { id: 'demo-6', name: 'Meera', gamesWon: 87, totalWinnings: 149000 },
+];
 
 const Home = () => {
   const { user } = useAuth();
@@ -64,11 +74,7 @@ const Home = () => {
       setTimeout(() => navigate('/login'), 500);
       return;
     }
-    if (game.name?.toLowerCase() === 'ludo') {
-      navigate('/dashboard/ludo');
-    } else {
-      navigate(`/dashboard/games/${game.id}`);
-    }
+    navigate(getGameRoute(game));
   };
 
   const formatCurrency = (amount) => {
@@ -79,6 +85,8 @@ const Home = () => {
       maximumFractionDigits: 0,
     }).format(amount || 0);
   };
+
+  const topWinners = leaderboard.length > 0 ? leaderboard.slice(0, 6) : demoWinners;
 
   return (
     <>
@@ -407,25 +415,32 @@ const Home = () => {
           </div>
         </div>
         
-        <div className="p-4">
-          {leaderboard.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {leaderboard.slice(0, 6).map((player, index) => (
+        <div className="p-4 overflow-hidden">
+          <div className="mb-3 flex items-center justify-between text-xs uppercase tracking-[0.25em] text-gray-500">
+            <span>{leaderboard.length > 0 ? 'Live leaderboard' : 'Featured winners'}</span>
+            <span>{leaderboard.length > 0 ? 'Updated from players' : 'Demo showcase'}</span>
+          </div>
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-black/10">
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#0b0f1a] to-transparent z-10" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#0b0f1a] to-transparent z-10" />
+            <motion.div
+              className="flex gap-4 p-4 w-max"
+              animate={{ x: ['0%', '-50%'] }}
+              transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}
+            >
+              {[...topWinners, ...topWinners].map((player, index) => (
                 <motion.div
-                  key={player.id || index}
-                  className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-amber-500/30 transition-all duration-300"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ x: 4 }}
+                  key={`${player.id || player.name}-${index}`}
+                  className="w-[290px] sm:w-[320px] flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-amber-500/30 transition-all duration-300 backdrop-blur-sm"
+                  whileHover={{ y: -4, scale: 1.01 }}
                 >
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-extrabold text-lg ${
-                    index === 0 ? 'bg-gradient-to-br from-amber-400 to-amber-600 text-black shadow-lg shadow-amber-500/30' :
-                    index === 1 ? 'bg-gradient-to-br from-gray-300 to-gray-500 text-black' :
-                    index === 2 ? 'bg-gradient-to-br from-amber-700 to-amber-900 text-white' :
+                    index % topWinners.length === 0 ? 'bg-gradient-to-br from-amber-400 to-amber-600 text-black shadow-lg shadow-amber-500/30' :
+                    index % topWinners.length === 1 ? 'bg-gradient-to-br from-gray-300 to-gray-500 text-black' :
+                    index % topWinners.length === 2 ? 'bg-gradient-to-br from-amber-700 to-amber-900 text-white' :
                     'bg-white/10 text-gray-400'
                   }`}>
-                    {index < 3 ? <Trophy size={20} /> : `#${index + 1}`}
+                    {index % topWinners.length < 3 ? <Trophy size={20} /> : `#${(index % topWinners.length) + 1}`}
                   </div>
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 flex items-center justify-center font-bold text-lg text-white shadow-lg">
                     {player.name?.charAt(0).toUpperCase()}
@@ -434,21 +449,14 @@ const Home = () => {
                     <div className="font-bold text-white truncate">{player.name}</div>
                     <div className="text-xs text-gray-400">{player.gamesWon || 0} wins</div>
                   </div>
-                  <div className="flex items-center gap-1.5 text-amber-400 font-bold">
+                  <div className="flex items-center gap-1.5 text-amber-400 font-bold whitespace-nowrap">
                     <Sparkles size={16} />
                     {formatCurrency(player.totalWinnings || player.balance || 0)}
                   </div>
                 </motion.div>
               ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 flex items-center justify-center">
-                <Trophy size={32} className="text-amber-400/50" />
-              </div>
-              <p className="text-gray-400">No winners yet - be the first!</p>
-            </div>
-          )}
+            </motion.div>
+          </div>
         </div>
       </section>
 

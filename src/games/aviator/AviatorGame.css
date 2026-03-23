@@ -1,0 +1,402 @@
+.aviator-shell {
+  min-height: 100vh;
+  padding: 20px;
+  background:
+    radial-gradient(circle at top left, rgba(45, 212, 191, 0.14), transparent 30%),
+    radial-gradient(circle at top right, rgba(168, 85, 247, 0.18), transparent 30%),
+    linear-gradient(180deg, #060816 0%, #0b1024 46%, #070b18 100%);
+}
+
+.aviator-topbar,
+.aviator-layout,
+.aviator-stage-head,
+.aviator-stage-foot,
+.aviator-chip,
+.bet-grid,
+.auto-grid,
+.bet-summary,
+.my-bet-row,
+.live-item,
+.history-item,
+.aviator-balance,
+.aviator-back {
+  display: flex;
+}
+
+.aviator-topbar,
+.aviator-stage-head,
+.aviator-stage-foot,
+.bet-summary,
+.my-bet-row,
+.live-item,
+.history-item {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.aviator-topbar {
+  max-width: 1280px;
+  margin: 0 auto 18px;
+  gap: 16px;
+}
+
+.aviator-topbar h1 {
+  margin: 0;
+  color: #f8fafc;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.aviator-kicker {
+  color: #7dd3fc;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 4px;
+}
+
+.aviator-back,
+.aviator-balance,
+.aviator-chip,
+.history-pill,
+.bet-option,
+.auto-option {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+}
+
+.aviator-back {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  align-items: center;
+  justify-content: center;
+  color: #e2e8f0;
+}
+
+.aviator-balance {
+  gap: 8px;
+  color: #facc15;
+  padding: 10px 14px;
+  border-radius: 999px;
+  align-items: center;
+  font-weight: 700;
+}
+
+.aviator-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.aviator-stage {
+  flex: 1.4;
+  position: relative;
+  min-height: 650px;
+  overflow: hidden;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(11, 16, 36, 0.9), rgba(14, 22, 45, 0.78));
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.45);
+}
+
+.aviator-stage-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 70%, rgba(45, 212, 191, 0.16), transparent 26%),
+    radial-gradient(circle at 80% 25%, rgba(168, 85, 247, 0.18), transparent 28%);
+  pointer-events: none;
+}
+
+.phase-crashed {
+  box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.25), 0 30px 100px rgba(127, 29, 29, 0.45);
+}
+
+.aviator-stage-head,
+.aviator-stage-foot {
+  position: relative;
+  z-index: 2;
+  padding: 18px 18px 0;
+}
+
+.aviator-stage-foot {
+  padding: 0 18px 18px;
+  align-items: flex-end;
+}
+
+.aviator-chip,
+.aviator-status,
+.history-pill,
+.aviator-note {
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: #cbd5e1;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.aviator-graph-wrap {
+  height: 500px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aviator-graph {
+  position: absolute;
+  inset: 40px;
+  width: calc(100% - 80px);
+  height: calc(100% - 80px);
+  opacity: 0.92;
+}
+
+.aviator-center {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.aviator-label {
+  color: #94a3b8;
+  font-size: 14px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.aviator-label.running { color: #5eead4; }
+.aviator-label.crashed { color: #f87171; }
+
+.aviator-countdown,
+.aviator-multiplier {
+  font-size: clamp(52px, 9vw, 108px);
+  font-weight: 900;
+  line-height: 0.95;
+  color: #f8fafc;
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+}
+
+.aviator-multiplier {
+  color: #ecfeff;
+}
+
+.aviator-multiplier.crash {
+  color: #fca5a5;
+  text-shadow: 0 0 28px rgba(239, 68, 68, 0.4);
+}
+
+.aviator-rocket {
+  font-size: 44px;
+  margin-top: 18px;
+  animation: rocket-float 1.8s ease-in-out infinite;
+}
+
+@keyframes rocket-float {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-10px) rotate(3deg); }
+}
+
+.aviator-status {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(15, 23, 42, 0.65);
+}
+
+.aviator-history-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.history-pill.hot { color: #facc15; border-color: rgba(250, 204, 21, 0.25); }
+.history-pill.warm { color: #4ade80; border-color: rgba(74, 222, 128, 0.25); }
+.history-pill.cold { color: #fda4af; border-color: rgba(244, 114, 182, 0.25); }
+
+.aviator-side {
+  flex: 0.9;
+  display: grid;
+  gap: 18px;
+}
+
+.aviator-card {
+  border-radius: 24px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.58));
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #f8fafc;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.bet-grid,
+.auto-grid {
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.bet-option,
+.auto-option {
+  border-radius: 14px;
+  color: #cbd5e1;
+  padding: 10px 12px;
+  font-weight: 700;
+}
+
+.bet-option.active,
+.auto-option.active {
+  color: #fff;
+  border-color: rgba(45, 212, 191, 0.4);
+  background: linear-gradient(135deg, rgba(45, 212, 191, 0.22), rgba(168, 85, 247, 0.22));
+}
+
+.auto-label {
+  display: block;
+  color: #94a3b8;
+  font-size: 12px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.bet-summary,
+.my-bet-box,
+.live-list,
+.history-list {
+  gap: 12px;
+}
+
+.bet-summary {
+  flex-direction: column;
+  align-items: stretch;
+  margin-bottom: 16px;
+}
+
+.bet-summary div,
+.my-bet-row,
+.live-item,
+.history-item {
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.bet-summary span,
+.my-bet-row span,
+.live-item span,
+.history-item span {
+  color: #94a3b8;
+  display: block;
+  font-size: 12px;
+}
+
+.bet-summary strong,
+.my-bet-row strong,
+.live-item strong,
+.history-item strong {
+  color: #f8fafc;
+}
+
+.aviator-action {
+  width: 100%;
+  margin-top: 12px;
+  border: 0;
+  border-radius: 18px;
+  padding: 16px;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  color: white;
+}
+
+.aviator-action.place {
+  background: linear-gradient(135deg, #0f766e, #2dd4bf);
+  box-shadow: 0 12px 35px rgba(45, 212, 191, 0.28);
+}
+
+.aviator-action.cashout {
+  background: linear-gradient(135deg, #7c3aed, #c084fc);
+  box-shadow: 0 14px 35px rgba(168, 85, 247, 0.28);
+}
+
+.aviator-action.disabled {
+  opacity: 0.45;
+  box-shadow: none;
+}
+
+.my-bet-box { margin-top: 14px; }
+
+.live-list,
+.history-list {
+  display: grid;
+}
+
+.live-status.active { color: #5eead4; }
+.live-status.cashed_out { color: #c4b5fd; }
+.live-status.loss { color: #fda4af; }
+
+.aviator-note {
+  margin-top: 12px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.aviator-note.success { color: #86efac; }
+.aviator-note.error { color: #fca5a5; }
+
+.empty-line {
+  color: #64748b;
+  text-align: center;
+  padding: 18px 10px;
+}
+
+@media (max-width: 980px) {
+  .aviator-layout {
+    flex-direction: column;
+  }
+
+  .aviator-stage,
+  .aviator-side {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .aviator-shell {
+    padding: 14px;
+  }
+
+  .aviator-topbar {
+    align-items: flex-start;
+  }
+
+  .aviator-topbar h1 {
+    font-size: 26px;
+  }
+
+  .aviator-stage {
+    min-height: 500px;
+  }
+
+  .aviator-stage-head,
+  .aviator-stage-foot {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .aviator-history-strip {
+    justify-content: flex-start;
+  }
+}

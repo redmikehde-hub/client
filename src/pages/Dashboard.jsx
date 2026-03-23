@@ -7,6 +7,7 @@ import {
 import { motion } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { leaderboardService, gameService } from '../services/api';
+import { getGameRoute } from '../utils/gameRoutes';
 
 const Dashboard = () => {
   const { user, loading: authLoading, fetchUser } = useAuth();
@@ -202,7 +203,7 @@ const Dashboard = () => {
               <motion.div
                 key={game.id}
                 className="relative overflow-hidden rounded-2xl cursor-pointer group h-[200px]"
-                onClick={() => navigate(game.name?.toLowerCase() === 'ludo' ? '/dashboard/ludo' : `/dashboard/games/${game.id}`)}
+                onClick={() => navigate(getGameRoute(game))}
                 initial={{ opacity: 0, x: index === 0 ? -20 : 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 whileHover={{ y: -4 }}

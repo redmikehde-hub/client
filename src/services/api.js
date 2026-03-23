@@ -153,6 +153,7 @@ export const broadcastService = {
 
 export const ludoService = {
   startGame: (data) => api.post('/ludo/start', data),
+  startMultiplayer: (data) => api.post('/ludo/start-multiplayer', data),
   getGameState: (gameId) => api.get(`/ludo/${gameId}`),
   rollDice: (gameId) => api.post(`/ludo/${gameId}/roll`),
   makeMove: (gameId, tokenIndex) => api.post(`/ludo/${gameId}/move`, { tokenIndex }),
@@ -167,6 +168,26 @@ export const adminService = {
   getStats: () => api.get('/admin/stats'),
   sendBroadcast: (data) => api.post('/admin/notify', data),
   getBroadcasts: () => api.get('/admin/broadcasts'),
+};
+
+export const matkaService = {
+  getCurrentRound: () => api.get('/matka/round'),
+  placeBet: (data) => api.post('/matka/bet', data),
+  getResults: (params) => api.get('/matka/results', { params }),
+  getMyBets: (params) => api.get('/matka/my-bets', { params }),
+};
+
+export const aviatorService = {
+  getState: () => api.get('/aviator/state'),
+  placeBet: (data) => api.post('/aviator/bet', data),
+  cashout: () => api.post('/aviator/cashout'),
+  getHistory: (params) => api.get('/aviator/history', { params }),
+};
+
+export const sportService = {
+  getMatches: () => api.get('/sport/matches'),
+  placeBet: (data) => api.post('/sport/bet', data),
+  getMyBets: (params) => api.get('/sport/my-bets', { params }),
 };
 
 export default api;

@@ -24,6 +24,9 @@ const GamePlay = () => {
   const [balance, setBalance] = useState(0);
   const [gameHistory, setGameHistory] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
+  const [showGamePopup, setShowGamePopup] = useState(false);
+  const [popupPhase, setPopupPhase] = useState('idle');
+  const [popupValue, setPopupValue] = useState('');
 
   useEffect(() => {
     if (user?.balance !== undefined) {
@@ -82,10 +85,30 @@ const GamePlay = () => {
 
     setIsPlaying(true);
     setGameResult(null);
+    setShowGamePopup(true);
+    setPopupPhase('arming');
+    setPopupValue(selectedOption || game?.name || 'Ready');
+
+    const previews = {
+      Colour: COLORS,
+      Sport: ['Cricket', 'Football', 'Tennis', 'Kabaddi'],
+      Aviator: ['1.18x', '1.42x', '2.08x', '3.21x'],
+    };
 
     setTimeout(() => {
-      playGame();
-    }, 1500);
+      setPopupPhase('running');
+      const values = previews[game?.name] || ['Ready', 'Live', 'Play'];
+      let index = 0;
+      const interval = setInterval(() => {
+        setPopupValue(values[index % values.length]);
+        index += 1;
+      }, 160);
+
+      setTimeout(() => {
+        clearInterval(interval);
+        playGame();
+      }, 1800);
+    }, 650);
   };
 
   const playGame = async () => {
@@ -108,6 +131,8 @@ const GamePlay = () => {
         winAmount: result.winAmount,
         betAmount
       });
+      setPopupPhase('result');
+      setPopupValue(result.result === 'WIN' ? `+${formatCurrency(result.winAmount)}` : 'CRASHED');
 
       updateUser({ balance: result.newBalance });
       fetchUser();
@@ -124,6 +149,7 @@ const GamePlay = () => {
         timestamp: new Date()
       }, ...prev.slice(0, 9)]);
     } catch (error) {
+      setPopupPhase('error');
       toast.error(error.response?.data?.error || 'Failed to play game');
     } finally {
       setIsPlaying(false);
@@ -144,6 +170,18 @@ const GamePlay = () => {
   const resetGame = () => {
     setGameResult(null);
     setSelectedOption(null);
+    setShowGamePopup(false);
+    setPopupPhase('idle');
+    setPopupValue('');
+  };
+
+  const canCloseGamePopup = !isPlaying && !!gameResult;
+
+  const closeGamePopup = () => {
+    if (!canCloseGamePopup) return;
+    setShowGamePopup(false);
+    setPopupPhase('idle');
+    setPopupValue('');
   };
 
   const quickAmounts = [10, 25, 50, 100, 250, 500, 1000];
@@ -229,85 +267,13 @@ const GamePlay = () => {
         </div>
       </motion.div>
 
-      <AnimatePresence mode="wait">
-        {gameResult ? (
-          <motion.div
-            key="result"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            className="premium-card rounded-3xl p-8 text-center mb-6"
-          >
-            <motion.div
-              className={`w-24 h-24 rounded-full mx-auto mb-6 flex items-center justify-center ${
-                gameResult.isWin ? 'bg-success/20 animate-pulse' : 'bg-danger/20'
-              }`}
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ type: 'spring', stiffness: 200, damping: 10 }}
-            >
-              {gameResult.isWin ? (
-                <Trophy size={48} className="text-success" />
-              ) : (
-                <X size={48} className="text-danger" />
-              )}
-            </motion.div>
-
-            <h2 className={`text-3xl font-black mb-2 ${gameResult.isWin ? 'text-success' : 'text-danger'}`}>
-              {gameResult.isWin ? 'You Won!' : 'You Lost!'}
-            </h2>
-
-            {gameResult.isWin && (
-              <motion.div 
-                className="text-5xl font-black text-success mb-4"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.2 }}
-              >
-                +{formatCurrency(gameResult.winAmount)}
-              </motion.div>
-            )}
-
-            <div className="p-4 bg-black/20 rounded-xl mb-6">
-              <div className="text-sm text-text-muted mb-2">Result</div>
-              <div className="text-2xl font-bold">
-                <span className={`px-6 py-3 rounded-xl text-3xl font-black ${
-                  gameResult.isWin 
-                    ? 'bg-success/20 text-success border-2 border-success/30' 
-                    : 'bg-danger/20 text-danger border-2 border-danger/30'
-                }`}>
-                  {gameResult.isWin ? 'WIN' : 'LOSS'}
-                </span>
-              </div>
-            </div>
-
-            <div className="flex gap-3">
-              <motion.button
-                className="flex-1 py-4 rounded-2xl font-bold text-sm cursor-pointer bg-gradient-to-r from-primary to-neon-purple text-white shadow-lg shadow-primary/30 transition-all duration-300 flex items-center justify-center gap-2"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={resetGame}
-              >
-                <Play size={18} /> Play Again
-              </motion.button>
-              <motion.button
-                className="px-6 py-4 rounded-2xl font-bold text-sm cursor-pointer bg-white/5 text-text-secondary border border-white/10 transition-all duration-300"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => navigate('/dashboard/games')}
-              >
-                Back
-              </motion.button>
-            </div>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="betting"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <div className="premium-card rounded-3xl p-6 mb-6">
+      <motion.div
+        key="betting"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        <div className="premium-card rounded-3xl p-6 mb-6">
               <h3 className="font-bold mb-4 flex items-center gap-2">
                 <Target size={20} className="text-primary" />
                 Select Your Bet
@@ -432,28 +398,136 @@ const GamePlay = () => {
                 </div>
               </div>
 
-              <motion.button
-                className={`w-full py-5 rounded-2xl font-bold text-lg cursor-pointer shadow-lg transition-all duration-300 flex items-center justify-center gap-3 ${
-                  isPlaying || (needsSelection && !selectedOption) || betAmount < (game?.minBet || 10)
-                    ? 'bg-gray-500/50 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-success to-emerald-600 text-white shadow-success/30 hover:shadow-success/50'
-                }`}
-                disabled={isPlaying || (needsSelection && !selectedOption) || betAmount < (game?.minBet || 10)}
-                whileHover={!isPlaying && (!needsSelection || selectedOption) ? { scale: 1.02 } : {}}
-                whileTap={!isPlaying && (!needsSelection || selectedOption) ? { scale: 0.98 } : {}}
-                onClick={placeBet}
-              >
-                {isPlaying ? (
-                  <>
-                    <RotateCcw size={24} className="animate-spin" /> Placing Bet...
-                  </>
-                ) : (
-                  <>
-                    <Play size={24} /> Bet {formatCurrency(betAmount)}
-                  </>
-                )}
-              </motion.button>
-            </div>
+          <motion.button
+            className={`w-full py-5 rounded-2xl font-bold text-lg cursor-pointer shadow-lg transition-all duration-300 flex items-center justify-center gap-3 ${
+              isPlaying || (needsSelection && !selectedOption) || betAmount < (game?.minBet || 10)
+                ? 'bg-gray-500/50 cursor-not-allowed'
+                : 'bg-gradient-to-r from-success to-emerald-600 text-white shadow-success/30 hover:shadow-success/50'
+            }`}
+            disabled={isPlaying || (needsSelection && !selectedOption) || betAmount < (game?.minBet || 10)}
+            whileHover={!isPlaying && (!needsSelection || selectedOption) ? { scale: 1.02 } : {}}
+            whileTap={!isPlaying && (!needsSelection || selectedOption) ? { scale: 0.98 } : {}}
+            onClick={placeBet}
+          >
+            {isPlaying ? (
+              <>
+                <RotateCcw size={24} className="animate-spin" /> Launching Game...
+              </>
+            ) : (
+              <>
+                <Play size={24} /> Bet {formatCurrency(betAmount)}
+              </>
+            )}
+          </motion.button>
+        </div>
+      </motion.div>
+
+      <AnimatePresence>
+        {showGamePopup && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[70] flex items-center justify-center p-4"
+            onClick={canCloseGamePopup ? closeGamePopup : undefined}
+          >
+            <div className="absolute inset-0 bg-black/85 backdrop-blur-xl" />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-4xl overflow-hidden rounded-[32px] border border-white/10 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.12),transparent_30%),radial-gradient(circle_at_top_right,rgba(168,85,247,0.14),transparent_30%),linear-gradient(180deg,#0f172a,#020617)] p-6 shadow-[0_30px_120px_rgba(0,0,0,0.6)]"
+            >
+              <div className="absolute inset-0 opacity-60">
+                <div className="absolute -left-8 top-10 h-40 w-40 rounded-full bg-cyan-400/10 blur-3xl" />
+                <div className="absolute -right-10 bottom-6 h-44 w-44 rounded-full bg-fuchsia-500/10 blur-3xl" />
+              </div>
+
+              <div className="relative z-10">
+                <div className="mb-6 flex items-center justify-between">
+                  <div>
+                    <div className="text-[11px] uppercase tracking-[0.35em] text-cyan-300/70">Live Game</div>
+                    <h3 className="text-2xl font-black text-white">{game?.name} Arena</h3>
+                  </div>
+                  <button
+                    className="rounded-full border border-white/10 bg-white/5 p-2 text-gray-300 transition hover:bg-white/10 hover:text-white"
+                    onClick={closeGamePopup}
+                    disabled={!canCloseGamePopup}
+                  >
+                    <X size={18} />
+                  </button>
+                </div>
+
+                <div className="grid gap-5 md:grid-cols-[1.3fr_0.7fr]">
+                  <div className="rounded-[28px] border border-white/10 bg-white/5 p-6">
+                    <div className="mb-4 flex items-center justify-between text-sm text-slate-300">
+                      <span>{popupPhase === 'arming' ? 'Preparing round' : popupPhase === 'running' ? 'Game live' : popupPhase === 'result' ? 'Result ready' : 'Game state'}</span>
+                      <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-cyan-200">Bet {formatCurrency(betAmount)}</span>
+                    </div>
+
+                    <div className={`mb-5 flex min-h-[220px] flex-col items-center justify-center rounded-[24px] border text-center ${popupPhase === 'result' && gameResult?.isWin ? 'border-emerald-400/30 bg-emerald-400/10' : popupPhase === 'result' ? 'border-rose-400/30 bg-rose-400/10' : 'border-white/10 bg-slate-950/40'}`}>
+                      <motion.div
+                        key={`${popupPhase}-${popupValue}`}
+                        initial={{ scale: 0.9, opacity: 0.5 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        className="px-6"
+                      >
+                        <div className="mb-4 text-6xl">{popupPhase === 'result' ? (gameResult?.isWin ? '🏆' : '💥') : game?.name === 'Aviator' ? '🚀' : game?.name === 'Colour' ? '🎯' : game?.name === 'Sport' ? '🏟️' : '🎮'}</div>
+                        <div className={`text-[12px] uppercase tracking-[0.4em] ${popupPhase === 'result' && gameResult?.isWin ? 'text-emerald-300' : popupPhase === 'result' ? 'text-rose-300' : 'text-cyan-300/70'}`}>
+                          {popupPhase === 'arming' ? 'Loading' : popupPhase === 'running' ? 'Playing' : popupPhase === 'result' ? 'Finished' : 'Ready'}
+                        </div>
+                        <div className="mt-4 text-5xl font-black text-white md:text-6xl">{popupValue || game?.name}</div>
+                        {popupPhase === 'result' && gameResult && (
+                          <div className="mt-4 text-lg font-semibold text-slate-200">
+                            {gameResult.isWin ? `You won ${formatCurrency(gameResult.winAmount)}` : `You lost ${formatCurrency(gameResult.betAmount)}`}
+                          </div>
+                        )}
+                      </motion.div>
+                    </div>
+
+                    <div className="grid gap-3 sm:grid-cols-3">
+                      {[
+                        { label: 'Selection', value: selectedOption || 'Auto' },
+                        { label: 'Bet', value: formatCurrency(betAmount) },
+                        { label: 'Multiplier', value: `${getMultiplier()}x` },
+                      ].map((item) => (
+                        <div key={item.label} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                          <div className="text-xs uppercase tracking-[0.25em] text-slate-400">{item.label}</div>
+                          <div className="mt-2 text-lg font-bold text-white">{item.value}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-4 rounded-[28px] border border-white/10 bg-white/5 p-5">
+                    <div className="text-sm font-bold text-white">Round Feed</div>
+                    <div className="space-y-3 text-sm text-slate-300">
+                      <div className="rounded-2xl border border-white/10 bg-black/20 p-4">Bet accepted and moved to live game popup.</div>
+                      <div className="rounded-2xl border border-white/10 bg-black/20 p-4">Gameplay animates here before showing final win/loss.</div>
+                      <div className="rounded-2xl border border-white/10 bg-black/20 p-4">Wallet and result stay connected to the backend.</div>
+                    </div>
+
+                    {popupPhase === 'result' && (
+                      <div className="mt-auto flex gap-3">
+                        <button
+                          className="flex-1 rounded-2xl bg-gradient-to-r from-cyan-500 to-fuchsia-500 px-4 py-3 font-bold text-white"
+                          onClick={resetGame}
+                        >
+                          Play Again
+                        </button>
+                        <button
+                          className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 font-bold text-white"
+                          onClick={closeGamePopup}
+                        >
+                          Close
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

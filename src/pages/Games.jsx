@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { gameService } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
+import { getGameRoute } from '../utils/gameRoutes';
 
 const Games = () => {
   const { user } = useAuth();
@@ -60,11 +61,7 @@ const Games = () => {
       return;
     }
     
-    if (game.name?.toLowerCase() === 'ludo') {
-      navigate('/dashboard/ludo');
-    } else {
-      navigate(`/dashboard/games/${game.id}`);
-    }
+    navigate(getGameRoute(game));
   };
 
   return (

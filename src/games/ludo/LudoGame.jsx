@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
 import { ludoService } from '../../services/api';
 import { LudoGameEngine } from './gameEngine';
@@ -381,16 +382,32 @@ const LudoGame = () => {
 
         {gameState === 'playing' && (
           <div className="space-y-4">
+            {/* Turn Indicator */}
             <div className="flex items-center justify-between">
-              <div className={`px-4 py-2 rounded-xl ${isUserTurn ? 'bg-blue-500/20 text-blue-400' : 'bg-red-500/20 text-red-400'}`}>
-                {isUserTurn ? '🎯 Your Turn' : '🤖 AI Turn'}
+              <div className={`px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 ${
+                isUserTurn 
+                  ? 'bg-gradient-to-r from-blue-500/20 to-blue-600/20 text-blue-400 border border-blue-500/30' 
+                  : 'bg-gradient-to-r from-red-500/20 to-red-600/20 text-red-400 border border-red-500/30'
+              }`}>
+                {isUserTurn ? (
+                  <>
+                    <span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+                    Your Turn
+                  </>
+                ) : (
+                  <>
+                    <span className="w-2 h-2 bg-red-400 rounded-full animate-pulse" />
+                    AI Turn
+                  </>
+                )}
               </div>
-              <button onClick={handleForfeit} className="text-xs text-red-400 hover:text-red-300">
-                ❌ Forfeit
+              <button onClick={handleForfeit} className="text-xs px-3 py-1.5 bg-red-500/10 text-red-400 hover:bg-red-500/20 rounded-lg border border-red-500/20 transition-all">
+                Forfeit
               </button>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-4 border border-white/10">
+            {/* Game Board */}
+            <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-3xl p-4 border border-white/10 shadow-2xl">
               <LudoBoard
                 key={boardKey}
                 engineRef={engineRef}
@@ -400,41 +417,94 @@ const LudoGame = () => {
               />
             </div>
 
-            <div className="flex items-center justify-center gap-6">
-              <div className="flex flex-col items-center">
-                <div 
-                  className={`w-16 h-16 rounded-xl bg-gradient-to-br from-yellow-200 to-yellow-400 flex items-center justify-center text-3xl font-bold text-gray-800 shadow-lg ${isRolling ? 'animate-bounce' : ''}`}
+            {/* Dice Section */}
+            <div className="flex items-center justify-center gap-8">
+              {/* User Score */}
+              <div className="flex flex-col items-center gap-1">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">{engineRef.current.tokens.USER.filter(t => t.isFinished).length}</span>
+                </div>
+                <span className="text-xs text-gray-400">Your Tokens</span>
+              </div>
+
+              {/* Dice */}
+              <div className="flex flex-col items-center gap-2">
+                <motion.div 
+                  animate={isRolling ? { rotate: 360 } : {}}
+                  transition={isRolling ? { duration: 0.5, repeat: Infinity, ease: "linear" } : {}}
+                  className={`w-20 h-20 rounded-2xl bg-gradient-to-br from-white to-gray-100 shadow-xl flex items-center justify-center text-4xl font-bold ${
+                    diceValue ? 'text-gray-800' : 'text-gray-400'
+                  } border-4 ${isUserTurn && !diceValue ? 'border-green-400' : 'border-gray-200'}`}
                 >
                   {diceValue || '?'}
-                </div>
+                </motion.div>
                 <button
                   onClick={rollDice}
                   disabled={isRolling || diceValue || !isUserTurn || loading}
-                  className="mt-2 px-4 py-2 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 transition-transform"
+                  className={`px-6 py-2.5 rounded-xl font-bold text-sm transition-all ${
+                    isUserTurn && !diceValue
+                      ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg shadow-green-500/30 hover:scale-105 active:scale-95'
+                      : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                  }`}
                 >
-                  Roll Dice
+                  {isRolling ? 'Rolling...' : 'Roll Dice'}
                 </button>
+              </div>
+
+              {/* AI Score */}
+              <div className="flex flex-col items-center gap-1">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-red-600 shadow-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">{engineRef.current.tokens.AI.filter(t => t.isFinished).length}</span>
+                </div>
+                <span className="text-xs text-gray-400">AI Tokens</span>
               </div>
             </div>
 
-            <div className={`p-4 rounded-xl text-center ${messageType === 'success' ? 'bg-emerald-500/20 text-emerald-400' : messageType === 'warning' ? 'bg-yellow-500/20 text-yellow-400' : messageType === 'error' ? 'bg-red-500/20 text-red-400' : 'bg-blue-500/20 text-blue-400'}`}>
+            {/* Message */}
+            <div className={`p-4 rounded-xl text-center font-medium ${
+              messageType === 'success' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' 
+              : messageType === 'warning' ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
+              : messageType === 'error' ? 'bg-red-500/20 text-red-400 border border-red-500/30'
+              : 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+            }`}>
               {message}
             </div>
 
+            {/* Progress Bar */}
             <div className="flex justify-center gap-8 text-sm">
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded-full bg-blue-500" />
+              <div className="flex items-center gap-3">
+                <div className="flex gap-1">
+                  {[0,1,2,3].map(i => (
+                    <div 
+                      key={i}
+                      className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                        engineRef.current.tokens.USER[i]?.isFinished
+                          ? 'bg-blue-500 text-white'
+                          : 'bg-blue-500/20 text-blue-400'
+                      }`}
+                    >
+                      {i + 1}
+                    </div>
+                  ))}
+                </div>
                 <span className="text-gray-400">You</span>
-                <span className="text-white font-bold">
-                  {engineRef.current.tokens.USER.filter(t => t.isFinished).length}/4
-                </span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded-full bg-red-500" />
+              <div className="flex items-center gap-3">
+                <div className="flex gap-1">
+                  {[0,1,2,3].map(i => (
+                    <div 
+                      key={i}
+                      className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                        engineRef.current.tokens.AI[i]?.isFinished
+                          ? 'bg-red-500 text-white'
+                          : 'bg-red-500/20 text-red-400'
+                      }`}
+                    >
+                      {i + 1}
+                    </div>
+                  ))}
+                </div>
                 <span className="text-gray-400">AI</span>
-                <span className="text-white font-bold">
-                  {engineRef.current.tokens.AI.filter(t => t.isFinished).length}/4
-                </span>
               </div>
             </div>
           </div>

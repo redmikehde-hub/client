@@ -27,6 +27,10 @@ import AdminBonusCodes from './pages/AdminBonusCodes';
 import AdminBroadcast from './pages/AdminBroadcast';
 import GamePlay from './pages/GamePlay';
 import LudoGame from './pages/LudoGame';
+import LudoMulti from './games/ludo-multi/LudoMulti';
+import MatkaGame from './games/matka/MatkaGame';
+import AviatorGame from './games/aviator/AviatorGame';
+import SportPrediction from './pages/SportPrediction';
 import Deposit from './pages/Deposit';
 import Referral from './pages/Referral';
 
@@ -240,10 +244,40 @@ function AppRoutes() {
             <GamePlay />
           </ProtectedRoute>
         } />
-        
+
+        <Route path="/dashboard/colour/:id" element={
+          <ProtectedRoute title="Play Colour" message="Login to play Colour and win exciting rewards">
+            <GamePlay />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/dashboard/sport/:id" element={
+          <ProtectedRoute title="Play Sport" message="Login to play Sport and win exciting rewards">
+            <SportPrediction />
+          </ProtectedRoute>
+        } />
+         
         <Route path="/dashboard/ludo" element={
           <ProtectedRoute title="Play Ludo" message="Login to play Ludo and win exciting rewards">
             <LudoGame />
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/dashboard/ludo-multi" element={
+          <ProtectedRoute title="Play Ludo Multiplayer" message="Login to play Ludo with real players">
+            <LudoMulti />
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/dashboard/matka" element={
+          <ProtectedRoute title="Play Matka" message="Login to play Matka and win exciting rewards">
+            <MatkaGame />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/dashboard/aviator" element={
+          <ProtectedRoute title="Play Aviator" message="Login to play Aviator and cash out before the crash">
+            <AviatorGame />
           </ProtectedRoute>
         } />
         
