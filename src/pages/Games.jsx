@@ -223,7 +223,7 @@ const Games = () => {
             >
               <div className="absolute inset-0">
                 <img 
-                  src={game.image || `https://picsum.photos/seed/${game.id}/400/500`}
+                  src={game.image}
                   alt={game.name}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />

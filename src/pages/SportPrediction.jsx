@@ -184,7 +184,7 @@ export default function SportPrediction() {
             {filteredMatches.map((match) => (
               <motion.div key={match.id} whileHover={{ y: -2 }} className="relative overflow-hidden rounded-2xl lg:rounded-[24px] border border-white/10 bg-white/5 backdrop-blur-xl">
                 <div className="absolute inset-0">
-                  <img src={match.banner} alt={match.league} className="h-full w-full object-cover opacity-20" />
+                  <img src={`https://picsum.photos/seed/${match.id}/400/500`} alt={match.league} className="h-full w-full object-cover opacity-20" />
                   <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/92 to-slate-950/70" />
                 </div>
                 <div className="relative z-10 p-3 sm:p-4 lg:p-5">
@@ -200,7 +200,7 @@ export default function SportPrediction() {
                   <div className="flex items-center gap-2 sm:gap-4 mb-2 sm:mb-3">
                     <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
                       <div className="h-10 w-10 sm:h-14 sm:w-14 rounded-xl sm:rounded-2xl bg-white/10 border border-white/10 overflow-hidden flex items-center justify-center shrink-0">
-                        {match.teamABadge ? <img src={match.teamABadge} alt={match.teamA} className="h-7 w-7 sm:h-10 sm:w-10 object-contain" /> : <span className="text-lg sm:text-xl font-black text-white">{match.teamA?.charAt(0)}</span>}
+                        <img src={`https://picsum.photos/seed/${match.id}a/100/100`} alt={match.teamA} className="h-full w-full object-cover" />
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="text-base sm:text-lg lg:text-xl font-black text-white truncate">{match.teamA}</div>
@@ -219,7 +219,7 @@ export default function SportPrediction() {
                         <div className="text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-cyan-300">Team B</div>
                       </div>
                       <div className="h-10 w-10 sm:h-14 sm:w-14 rounded-xl sm:rounded-2xl bg-white/10 border border-white/10 overflow-hidden flex items-center justify-center shrink-0">
-                        {match.teamBBadge ? <img src={match.teamBBadge} alt={match.teamB} className="h-7 w-7 sm:h-10 sm:w-10 object-contain" /> : <span className="text-lg sm:text-xl font-black text-white">{match.teamB?.charAt(0)}</span>}
+                        <img src={`https://picsum.photos/seed/${match.id}b/100/100`} alt={match.teamB} className="h-full w-full object-cover" />
                       </div>
                     </div>
                   </div>

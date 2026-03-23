@@ -309,6 +309,7 @@ function App() {
                   color: '#fff',
                   border: '1px solid #2d2d4a',
                   borderRadius: '12px',
+                  zIndex: 99999,
                 },
                 success: {
                   iconTheme: { primary: '#10b981', secondary: '#fff' },
@@ -317,6 +318,10 @@ function App() {
                   iconTheme: { primary: '#ef4444', secondary: '#fff' },
                 },
               }}
+              containerStyle={{
+                zIndex: 99999,
+              }}
+              containerClassName="!z-[99999]"
             />
           </SocketProvider>
         </AuthModalProvider>

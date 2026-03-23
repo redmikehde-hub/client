@@ -160,14 +160,16 @@ const NotificationBell = () => {
         {showPanel && (
           <>
             <motion.div
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+              key="notification-overlay"
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[99998]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setShowPanel(false)}
             />
             <motion.div
-              className="absolute right-0 top-full mt-3 w-[380px] max-h-[500px] sm:max-h-[600px] rounded-3xl bg-gradient-to-b from-[#1a1a2e] to-[#0f0f1a] border border-white/10 shadow-2xl shadow-black/50 overflow-hidden z-50"
+              key="notification-panel"
+              className="fixed top-16 right-2 sm:right-4 w-[calc(100vw-16px)] sm:w-[380px] max-h-[calc(100vh-100px)] sm:max-h-[600px] rounded-2xl sm:rounded-3xl bg-gradient-to-b from-[#1a1a2e] to-[#0f0f1a] border border-white/10 shadow-2xl shadow-black/50 overflow-hidden z-[99999]"
               initial={{ opacity: 0, y: -20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}

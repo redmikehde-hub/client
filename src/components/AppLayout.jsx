@@ -385,7 +385,7 @@ const AppLayout = ({ children }) => {
 
       <div className="flex-1 lg:ml-[280px] flex flex-col min-h-screen w-0">
         {/* Premium Header with Live Winners Ticker */}
-        <header className="sticky top-0 z-40">
+        <header className="sticky top-0 z-30">
           {/* Main Header Bar */}
           <div className="bg-gradient-to-b from-black/90 to-black/80 backdrop-blur-xl border-b border-white/10 px-4 py-3">
             <div className="flex items-center justify-between gap-4">
@@ -475,7 +475,7 @@ const AppLayout = ({ children }) => {
 
           {/* Premium Recent Winners Ticker */}
           {!isAdmin && (
-            <div className="relative overflow-hidden bg-gradient-to-r from-purple-950/20 via-black/90 to-purple-950/20 border-b border-white/[0.05]">
+            <div className="relative overflow-hidden bg-gradient-to-r from-purple-950/20 via-black/90 to-purple-950/20 border-b border-white/[0.05] z-20">
               {/* Section Title */}
               <div className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 z-20 hidden md:flex items-center gap-3">
                 <div className="flex items-center gap-2">
