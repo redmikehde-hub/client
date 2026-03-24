@@ -7,6 +7,7 @@ import {
 import { motion } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { walletService } from '../services/api';
+import { TransactionSkeleton } from '../components/premium';
 
 const WalletPage = () => {
   const { user, fetchUser } = useAuth();
@@ -49,28 +50,28 @@ const WalletPage = () => {
 
   const getTransactionIcon = (type) => {
     if (type === 'DEPOSIT' || type === 'GAME_WIN') {
-      return { icon: ArrowDownLeft, bg: 'bg-emerald-500/20', color: 'text-emerald-400' };
+      return { icon: ArrowDownLeft, bg: 'bg-[var(--casino-green)]/20', color: 'text-[var(--casino-green)]' };
     }
     if (type === 'WITHDRAWAL') {
-      return { icon: ArrowUpRight, bg: 'bg-red-500/20', color: 'text-red-400' };
+      return { icon: ArrowUpRight, bg: 'bg-[var(--casino-red)]/20', color: 'text-[var(--casino-red)]' };
     }
     if (type === 'BONUS' || type === 'REFERRAL_BONUS') {
-      return { icon: Gift, bg: 'bg-amber-500/20', color: 'text-amber-400' };
+      return { icon: Gift, bg: 'bg-[var(--casino-orange)]/20', color: 'text-[var(--casino-orange)]' };
     }
-    return { icon: CreditCard, bg: 'bg-blue-500/20', color: 'text-blue-400' };
+    return { icon: CreditCard, bg: 'bg-[var(--casino-blue)]/20', color: 'text-[var(--casino-blue)]' };
   };
 
   return (
-    <div className="space-y-6">
+    <div className="p-4 lg:p-6 space-y-6 pb-20 lg:pb-6">
       {/* Balance Card */}
       <div className="relative overflow-hidden rounded-3xl">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-950/80 to-slate-900" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--casino-dark-3)] via-[var(--casino-dark)] to-[var(--casino-dark-3)]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--casino-dark)]/90 via-[var(--casino-dark)]/50 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--casino-green)]/50 to-transparent" />
         
         <div className="relative p-6 sm:p-8 text-center">
-          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center shadow-xl shadow-pink-500/30">
-            <Wallet size={32} className="text-white" />
+          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[var(--casino-green)] to-emerald-600 flex items-center justify-center shadow-xl shadow-green-500/30">
+            <Wallet size={32} className="text-black" />
           </div>
           
           <p className="text-sm text-gray-400 mb-2">Available Balance</p>
@@ -81,7 +82,7 @@ const WalletPage = () => {
           <div className="grid grid-cols-2 gap-3">
             <motion.button
               onClick={() => navigate('/dashboard/deposit')}
-              className="flex items-center justify-center gap-2 py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-lg"
+              className="flex items-center justify-center gap-2 py-4 rounded-2xl bg-gradient-to-r from-[var(--casino-green)] to-emerald-600 text-black font-bold shadow-lg shadow-green-500/30"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -90,7 +91,7 @@ const WalletPage = () => {
             </motion.button>
             <motion.button
               onClick={() => navigate('/dashboard/withdraw')}
-              className="flex items-center justify-center gap-2 py-4 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold shadow-lg"
+              className="flex items-center justify-center gap-2 py-4 rounded-2xl bg-gradient-to-r from-[var(--casino-purple)] to-[var(--casino-blue)] text-white font-bold shadow-lg shadow-purple-500/30"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -104,9 +105,9 @@ const WalletPage = () => {
       {/* Quick Actions */}
       <div className="grid grid-cols-3 gap-3">
         {[
-          { label: 'Buy Coins', icon: Banknote, path: '/dashboard/deposit', color: '#10b981' },
-          { label: 'Bonus', icon: Gift, path: '/dashboard/bonus', color: '#f59e0b' },
-          { label: 'Refer & Earn', icon: TrendingUp, path: '/dashboard/referral', color: '#ec4899' },
+          { label: 'Buy Coins', icon: Banknote, path: '/dashboard/deposit', color: 'var(--casino-green)' },
+          { label: 'Bonus', icon: Gift, path: '/dashboard/bonus', color: 'var(--casino-orange)' },
+          { label: 'Refer & Earn', icon: TrendingUp, path: '/dashboard/referral', color: 'var(--casino-purple)' },
         ].map((action) => (
           <motion.button
             key={action.label}
@@ -117,7 +118,7 @@ const WalletPage = () => {
           >
             <div 
               className="w-10 h-10 rounded-xl flex items-center justify-center"
-              style={{ backgroundColor: `${action.color}15` }}
+              style={{ backgroundColor: `${action.color}20` }}
             >
               <action.icon size={20} style={{ color: action.color }} />
             </div>
@@ -130,8 +131,8 @@ const WalletPage = () => {
       <section>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-bold flex items-center gap-3">
-            <span className="p-2 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl">
-              <Clock size={20} className="text-blue-400" />
+            <span className="p-2 bg-gradient-to-br from-[var(--casino-green)]/20 to-[var(--casino-purple)]/20 rounded-xl">
+              <Clock size={20} className="text-[var(--casino-green)]" />
             </span>
             Transactions
           </h2>
@@ -148,7 +149,7 @@ const WalletPage = () => {
               onClick={() => setActiveTab(tab.key)}
               className={`px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all ${
                 activeTab === tab.key
-                  ? 'bg-pink-500/20 text-pink-400 border border-pink-500/40'
+                  ? 'bg-[var(--casino-green)]/20 text-[var(--casino-green)] border border-[var(--casino-green)]/40'
                   : 'bg-white/5 text-gray-400 border border-white/10 hover:bg-white/10'
               }`}
             >
@@ -160,19 +161,19 @@ const WalletPage = () => {
         {loading ? (
           <div className="space-y-3">
             {[1, 2, 3, 4, 5].map(i => (
-              <div key={i} className="rounded-2xl skeleton h-20" />
+              <TransactionSkeleton key={i} />
             ))}
           </div>
         ) : filteredTransactions.length === 0 ? (
           <div className="text-center py-12 rounded-2xl bg-white/5 border border-white/10">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-blue-500/10 flex items-center justify-center">
-              <AlertCircle size={32} className="text-blue-400/50" />
+            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-[var(--casino-green)]/10 flex items-center justify-center">
+              <AlertCircle size={32} className="text-[var(--casino-green)]/50" />
             </div>
             <h3 className="text-lg font-bold text-white mb-2">No Transactions Yet</h3>
             <p className="text-sm text-gray-400 mb-4">Your transaction history will appear here</p>
             <button
               onClick={() => navigate('/dashboard/deposit')}
-              className="px-6 py-2 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold text-sm"
+              className="px-6 py-2 rounded-xl bg-gradient-to-r from-[var(--casino-green)] to-emerald-600 text-black font-semibold text-sm"
             >
               Add Money
             </button>
@@ -207,7 +208,7 @@ const WalletPage = () => {
                       })}
                     </div>
                   </div>
-                  <div className={`font-bold text-base ${tx.amount > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                  <div className={`font-bold text-base ${tx.amount > 0 ? 'text-[var(--casino-green)]' : 'text-[var(--casino-red)]'}`}>
                     {tx.amount > 0 ? '+' : ''}{formatCurrency(tx.amount)}
                   </div>
                 </motion.div>

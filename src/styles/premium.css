@@ -1,0 +1,350 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --casino-dark: #0a0a14;
+  --casino-dark-2: #0f172a;
+  --casino-dark-3: #1a1a2e;
+  
+  --casino-green: #00ff9d;
+  --casino-green-dark: #00cc7d;
+  --casino-orange: #ff9500;
+  --casino-purple: #a855f7;
+  --casino-blue: #3b82f6;
+  --casino-red: #ef4444;
+  --casino-yellow: #eab308;
+  
+  --glow-green: 0 0 30px rgba(0, 255, 157, 0.3);
+  --glow-orange: 0 0 30px rgba(255, 149, 0, 0.3);
+  --glow-purple: 0 0 30px rgba(168, 85, 247, 0.3);
+  --glow-blue: 0 0 30px rgba(59, 130, 246, 0.3);
+}
+
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: var(--casino-dark);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--casino-green), var(--casino-purple));
+  border-radius: 10px;
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Glow Effects */
+.glow-green {
+  box-shadow: var(--glow-green);
+}
+
+.glow-orange {
+  box-shadow: var(--glow-orange);
+}
+
+.glow-purple {
+  box-shadow: var(--glow-purple);
+}
+
+.glow-border {
+  border: 2px solid transparent;
+  background: linear-gradient(var(--casino-dark-3), var(--casino-dark-3)) padding-box,
+              linear-gradient(135deg, var(--casino-green), var(--casino-purple)) border-box;
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--casino-green), var(--casino-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-purple {
+  background: linear-gradient(135deg, var(--casino-purple), var(--casino-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, var(--casino-green), #00cc7d);
+  color: var(--casino-dark);
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 255, 157, 0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  border: 1px solid rgba(0, 255, 157, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(0, 255, 157, 0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, var(--casino-orange), #e68a00);
+  color: white;
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(255, 149, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 149, 0, 0.3);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(255, 149, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+.btn-premium {
+  background: linear-gradient(135deg, var(--casino-purple), #9333ea);
+  color: white;
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.btn-premium:active {
+  transform: translateY(0);
+}
+
+/* Cards */
+.card {
+  background: var(--casino-dark-3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--casino-green);
+  box-shadow: var(--glow-green);
+}
+
+.card-premium {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(59, 130, 246, 0.1));
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 20px;
+}
+
+/* Badges */
+.badge {
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-hot {
+  background: linear-gradient(135deg, var(--casino-red), var(--casino-orange));
+  color: white;
+}
+
+.badge-popular {
+  background: linear-gradient(135deg, var(--casino-purple), var(--casino-blue));
+  color: white;
+}
+
+.badge-new {
+  background: linear-gradient(135deg, var(--casino-green), #00d4aa);
+  color: var(--casino-dark);
+}
+
+.badge-realtime {
+  background: rgba(0, 255, 157, 0.15);
+  color: var(--casino-green);
+  border: 1px solid rgba(0, 255, 157, 0.3);
+}
+
+/* Stats Card */
+.stats-card {
+  background: linear-gradient(135deg, var(--casino-dark-3), var(--casino-dark-2));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--casino-green), var(--casino-purple));
+}
+
+/* Input Fields */
+.input-casino {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 14px 18px;
+  color: white;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.input-casino:focus {
+  outline: none;
+  border-color: var(--casino-green);
+  box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
+}
+
+.input-casino::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Hero Banner */
+.hero-banner {
+  background: linear-gradient(135deg, var(--casino-dark-3) 0%, var(--casino-dark) 100%);
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.hero-banner::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, var(--casino-green), var(--casino-purple), var(--casino-orange));
+  border-radius: 26px;
+  z-index: -1;
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-custom {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+  background: rgba(10, 10, 20, 0.95);
+  backdrop-filter: blur(30px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.mobile-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  color: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+  border-radius: 12px;
+}
+
+.mobile-nav-item.active {
+  color: var(--casino-green);
+  background: rgba(0, 255, 157, 0.1);
+}
+
+.mobile-nav-item:hover {
+  color: white;
+}
+
+/* Scrollbar Hide */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Loading Skeleton */
+.skeleton {
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0.05) 0%, 
+    rgba(255, 255, 255, 0.1) 50%, 
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

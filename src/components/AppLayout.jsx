@@ -51,14 +51,14 @@ const AppLayout = ({ children }) => {
 
   // Admin Sidebar
   const AdminSidebar = () => (
-    <aside className="hidden lg:flex flex-col fixed left-0 top-0 w-[280px] h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black z-50 overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(245,158,11,0.15)_0%,transparent_70%)]" />
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-500" />
+    <aside className="hidden lg:flex flex-col fixed left-0 top-0 w-[280px] h-screen bg-gradient-to-br from-[var(--casino-dark-3)] via-[var(--casino-dark-2)] to-[var(--casino-dark)] z-50 overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(0,255,157,0.08)_0%,transparent_70%)]" />
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--casino-green)] via-[var(--casino-purple)] to-[var(--casino-green)]" />
       
       <div className="relative z-10 p-6 border-b border-white/10">
         <div className="flex items-center gap-4">
           <motion.div 
-            className="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/30"
+            className="w-12 h-12 bg-gradient-to-br from-[var(--casino-green)] to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/30"
             whileHover={{ scale: 1.05, rotate: 5 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate(currentHomeItem.path)}
@@ -68,7 +68,7 @@ const AppLayout = ({ children }) => {
           </motion.div>
           <div>
             <span className="text-xl font-black text-white tracking-tight">Admin Panel</span>
-            <p className="text-[10px] text-amber-400/80 uppercase tracking-widest font-medium">
+            <p className="text-[10px] text-[var(--casino-green)]/80 uppercase tracking-widest font-medium">
               {user?.role === 'SUPER_ADMIN' ? 'Super Admin' : 'Sub Admin'}
             </p>
           </div>
@@ -76,7 +76,7 @@ const AppLayout = ({ children }) => {
       </div>
 
       <nav className="relative z-10 flex-1 p-4 overflow-y-auto scrollbar-hide">
-        <div className="text-[10px] font-bold text-amber-400/80 uppercase tracking-[0.2em] px-4 mb-3">Management</div>
+        <div className="text-[10px] font-bold text-[var(--casino-green)]/60 uppercase tracking-[0.2em] px-4 mb-3">Management</div>
         
           {[
             { path: '/dashboard/admin', icon: LayoutDashboard, label: 'Dashboard', exact: true },
@@ -92,17 +92,17 @@ const AppLayout = ({ children }) => {
             <NavLink
               to={item.path}
               end={item.exact}
-              className={({ isActive }) => `flex items-center gap-4 px-4 py-3 rounded-xl text-[14px] font-medium no-underline transition-all duration-300 mb-1.5 relative group ${isActive ? 'bg-gradient-to-r from-amber-500/20 to-orange-500/10 text-amber-400' : 'text-gray-400 hover:text-amber-400 hover:bg-white/5'}`}
+              className={({ isActive }) => `flex items-center gap-4 px-4 py-3 rounded-xl text-[14px] font-medium no-underline transition-all duration-300 mb-1.5 relative group ${isActive ? 'bg-gradient-to-r from-[var(--casino-green)]/20 to-[var(--casino-purple)]/10 text-[var(--casino-green)]' : 'text-gray-400 hover:text-[var(--casino-green)] hover:bg-white/5'}`}
             >
               {({ isActive }) => (
                 <>
                   {isActive && (
                     <>
-                      <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-amber-500/10 to-transparent" />
-                      <span className="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-amber-400 rounded-l-full shadow-lg shadow-amber-400/50" />
+                      <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-[var(--casino-green)]/10 to-transparent" />
+                      <span className="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-[var(--casino-green)] rounded-l-full shadow-lg shadow-green-500/50" />
                     </>
                   )}
-                  <span className={`relative z-10 p-1.5 rounded-lg ${isActive ? 'bg-amber-500/20' : 'bg-white/5 group-hover:bg-amber-500/10'} transition-all`}>
+                  <span className={`relative z-10 p-1.5 rounded-lg ${isActive ? 'bg-[var(--casino-green)]/20' : 'bg-white/5 group-hover:bg-[var(--casino-green)]/10'} transition-all`}>
                     <item.icon size={18} />
                   </span>
                   <span className="relative z-10 font-semibold">{item.label}</span>
@@ -115,8 +115,8 @@ const AppLayout = ({ children }) => {
         <div className="text-[10px] font-bold text-gray-500/80 uppercase tracking-[0.2em] px-4 mt-6 mb-3">Quick Stats</div>
         
         {[
-          { label: 'Total Users', value: '2,450', color: 'text-blue-400' },
-          { label: 'Pending Withdraw', value: '₹45,000', color: 'text-red-400' },
+          { label: 'Total Users', value: '2,450', color: 'text-[var(--casino-blue)]' },
+          { label: 'Pending Withdraw', value: '₹45,000', color: 'text-[var(--casino-red)]' },
         ].map((stat) => (
           <div key={stat.label} className="px-4 py-3 mb-1">
             <div className="text-[10px] text-gray-500 mb-0.5">{stat.label}</div>
@@ -127,22 +127,22 @@ const AppLayout = ({ children }) => {
 
       <div className="relative z-10 p-4 border-t border-white/10">
         <motion.div 
-          className="p-4 bg-gradient-to-br from-amber-500/10 to-orange-500/5 rounded-xl mb-4 border border-amber-500/20"
+          className="p-4 bg-gradient-to-br from-[var(--casino-green)]/10 to-[var(--casino-purple)]/5 rounded-xl mb-4 border border-[var(--casino-green)]/20"
         >
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[var(--casino-green)] to-emerald-600 flex items-center justify-center font-bold text-black">
               {user?.name?.charAt(0).toUpperCase()}
             </div>
             <div className="flex-1 min-w-0">
               <div className="font-bold text-sm text-white truncate">{user?.name}</div>
-              <div className="text-[10px] text-amber-400 capitalize">{user?.role?.toLowerCase().replace('_', ' ')}</div>
+              <div className="text-[10px] text-[var(--casino-green)] capitalize">{user?.role?.toLowerCase().replace('_', ' ')}</div>
             </div>
           </div>
         </motion.div>
 
         <motion.button 
           onClick={handleLogout} 
-          className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl text-red-400 font-semibold text-[13px] bg-red-500/10 border border-red-500/20 transition-all duration-300 hover:bg-red-500/20"
+          className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl text-[var(--casino-red)] font-semibold text-[13px] bg-[var(--casino-red)]/10 border border-[var(--casino-red)]/20 transition-all duration-300 hover:bg-[var(--casino-red)]/20"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
@@ -155,14 +155,14 @@ const AppLayout = ({ children }) => {
 
   // User Sidebar
   const UserSidebar = () => (
-    <aside className="hidden lg:flex flex-col fixed left-0 top-0 w-[280px] h-screen bg-gradient-to-br from-slate-900 via-slate-900 to-black z-50 overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(236,72,153,0.1)_0%,transparent_70%)]" />
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500" />
+    <aside className="hidden lg:flex flex-col fixed left-0 top-0 w-[280px] h-screen bg-gradient-to-br from-[var(--casino-dark-3)] via-[var(--casino-dark-2)] to-[var(--casino-dark)] z-50 overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(0,255,157,0.08)_0%,transparent_70%)]" />
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--casino-green)] via-[var(--casino-purple)] to-[var(--casino-orange)]" />
       
       <div className="relative z-10 p-6 border-b border-white/5">
         <div className="flex items-center gap-4">
           <motion.div 
-            className="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-pink-500/30"
+            className="w-12 h-12 bg-gradient-to-br from-[var(--casino-green)] to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg shadow-green-500/30"
             whileHover={{ scale: 1.05, rotate: 5 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate(currentHomeItem.path)}
@@ -171,10 +171,10 @@ const AppLayout = ({ children }) => {
             <Crown size={24} color="white" />
           </motion.div>
           <div>
-            <span className="text-xl font-black bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent">
+            <span className="text-xl font-black text-white">
               IndiaPlay
             </span>
-            <p className="text-[10px] text-pink-400/60 uppercase tracking-widest">Premium Gaming</p>
+            <p className="text-[10px] text-[var(--casino-green)]/60 uppercase tracking-widest">Premium Gaming</p>
           </div>
         </div>
       </div>
@@ -193,17 +193,17 @@ const AppLayout = ({ children }) => {
             <NavLink
               to={item.path}
               end={item.exact}
-              className={({ isActive }) => `flex items-center gap-4 px-4 py-3.5 rounded-xl text-[15px] font-medium no-underline transition-all duration-300 mb-1.5 relative group ${isActive ? 'bg-gradient-to-r from-pink-500/20 to-purple-500/10 text-pink-400' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
+              className={({ isActive }) => `flex items-center gap-4 px-4 py-3.5 rounded-xl text-[15px] font-medium no-underline transition-all duration-300 mb-1.5 relative group ${isActive ? 'bg-gradient-to-r from-[var(--casino-green)]/20 to-[var(--casino-purple)]/10 text-[var(--casino-green)]' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
             >
               {({ isActive }) => (
                 <>
                   {isActive && (
                     <>
-                      <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-pink-500/10 to-transparent" />
-                      <span className="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-pink-500 to-purple-500 rounded-l-full shadow-lg shadow-pink-500/50" />
+                      <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-[var(--casino-green)]/10 to-transparent" />
+                      <span className="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-[var(--casino-green)] to-[var(--casino-purple)] rounded-l-full shadow-lg shadow-green-500/50" />
                     </>
                   )}
-                  <span className={`relative z-10 p-1.5 rounded-lg ${isActive ? 'bg-pink-500/20' : 'bg-white/5 group-hover:bg-white/10'} transition-all`}>
+                  <span className={`relative z-10 p-1.5 rounded-lg ${isActive ? 'bg-[var(--casino-green)]/20' : 'bg-white/5 group-hover:bg-white/10'} transition-all`}>
                     <item.icon size={20} />
                   </span>
                   <span className="relative z-10 font-semibold">{item.label}</span>
@@ -225,19 +225,19 @@ const AppLayout = ({ children }) => {
           <motion.div key={item.path} whileHover={{ x: 4 }} whileTap={{ scale: 0.98 }}>
             <NavLink
               to={item.path}
-              className={({ isActive }) => `flex items-center gap-4 px-4 py-3.5 rounded-xl text-[15px] font-medium no-underline transition-all duration-300 mb-1.5 relative group ${isActive ? 'bg-gradient-to-r from-pink-500/20 to-purple-500/10 text-pink-400' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
+              className={({ isActive }) => `flex items-center gap-4 px-4 py-3.5 rounded-xl text-[15px] font-medium no-underline transition-all duration-300 mb-1.5 relative group ${isActive ? 'bg-gradient-to-r from-[var(--casino-green)]/20 to-[var(--casino-purple)]/10 text-[var(--casino-green)]' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
             >
               {({ isActive }) => (
                 <>
                   {isActive && (
-                    <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-pink-500/10 to-transparent" />
+                    <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-[var(--casino-green)]/10 to-transparent" />
                   )}
-                  <span className={`relative z-10 p-1.5 rounded-lg ${isActive ? 'bg-pink-500/20' : 'bg-white/5 group-hover:bg-white/10'} transition-all flex items-center gap-2`}>
+                  <span className={`relative z-10 p-1.5 rounded-lg ${isActive ? 'bg-[var(--casino-green)]/20' : 'bg-white/5 group-hover:bg-white/10'} transition-all flex items-center gap-2`}>
                     <item.icon size={20} />
                     <span className="font-semibold">{item.label}</span>
                   </span>
                   {item.badge > 0 && (
-                    <span className="relative z-10 ml-auto px-2.5 py-1 bg-red-500 text-white text-[10px] font-bold rounded-full shadow-lg shadow-red-500/30 animate-pulse">
+                    <span className="relative z-10 ml-auto px-2.5 py-1 bg-[var(--casino-red)] text-white text-[10px] font-bold rounded-full shadow-lg shadow-red-500/30 animate-pulse">
                       {item.badge > 9 ? '9+' : item.badge}
                     </span>
                   )}
@@ -252,30 +252,30 @@ const AppLayout = ({ children }) => {
         {user ? (
           <>
             <motion.div 
-              className="p-4 bg-gradient-to-br from-pink-500/10 to-purple-500/5 rounded-2xl mb-4 border border-pink-500/20 backdrop-blur-sm cursor-pointer group"
+              className="p-4 bg-gradient-to-br from-[var(--casino-green)]/10 to-[var(--casino-purple)]/5 rounded-2xl mb-4 border border-[var(--casino-green)]/20 backdrop-blur-sm cursor-pointer group"
               whileHover={{ scale: 1.02 }}
               onClick={() => navigate('/dashboard/profile')}
             >
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center font-bold text-lg shadow-lg shadow-pink-500/20">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--casino-green)] to-emerald-600 flex items-center justify-center font-bold text-lg text-black shadow-lg shadow-green-500/20">
                   {user?.name?.charAt(0).toUpperCase()}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="font-bold text-[15px] text-white truncate">{user?.name}</div>
-                  <div className="text-[11px] text-pink-400 capitalize font-medium">{user?.role?.toLowerCase()}</div>
+                  <div className="text-[11px] text-[var(--casino-green)] capitalize font-medium">{user?.role?.toLowerCase()}</div>
                 </div>
-                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <div className="w-2 h-2 rounded-full bg-[var(--casino-green)] animate-pulse" />
               </div>
             </motion.div>
 
             <motion.div 
-              className="relative p-5 bg-gradient-to-br from-pink-500/15 to-purple-500/10 rounded-2xl mb-4 border border-pink-500/20 overflow-hidden"
+              className="relative p-5 bg-gradient-to-br from-[var(--casino-purple)]/15 to-[var(--casino-green)]/10 rounded-2xl mb-4 border border-[var(--casino-purple)]/20 overflow-hidden"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-pink-500/10 rounded-full blur-3xl" />
-              <Sparkles size={16} className="absolute top-4 right-4 text-amber-400 animate-pulse" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--casino-purple)]/10 rounded-full blur-3xl" />
+              <Sparkles size={16} className="absolute top-4 right-4 text-[var(--casino-green)] animate-pulse" />
               <div className="relative z-10">
                 <div className="text-[10px] text-gray-400/80 font-bold uppercase tracking-wider mb-1.5">Total Balance</div>
-                <div className="text-2xl font-black bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+                  <div className="text-2xl font-black bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-purple)] bg-clip-text text-transparent">
                   {formatCurrency(user?.balance)}
                 </div>
               </div>
@@ -297,7 +297,7 @@ const AppLayout = ({ children }) => {
               Sign in to unlock all features
             </p>
             <motion.button 
-              className="w-full py-3.5 px-6 rounded-xl font-bold text-sm cursor-pointer bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg shadow-pink-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-pink-500/40 hover:-translate-y-0.5"
+              className="w-full py-3.5 px-6 rounded-xl font-bold text-sm cursor-pointer bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-purple)] text-white shadow-lg shadow-[var(--casino-green)]/30 transition-all duration-300 hover:shadow-xl hover:shadow-[var(--casino-green)]/40 hover:-translate-y-0.5"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => navigate('/login')}
@@ -319,7 +319,7 @@ const AppLayout = ({ children }) => {
 
   // Mobile Bottom Nav - Admin
   const AdminBottomNav = () => (
-    <nav className="fixed bottom-0 left-0 right-0 bg-gray-900/95 backdrop-blur-xl border-t border-amber-500/30 px-2 py-2 flex justify-around items-center z-50 lg:hidden shadow-[0_-10px_40px_rgba(245,158,11,0.15)]">
+    <nav className="fixed bottom-0 left-0 right-0 bg-[var(--casino-dark)]/95 backdrop-blur-xl border-t border-[var(--casino-green)]/30 px-2 py-2 flex justify-around items-center z-50 lg:hidden shadow-[0_-10px_40px_rgba(0,255,157,0.1)]">
       {[
         { path: '/dashboard/admin', icon: LayoutDashboard, label: 'Home' },
         { path: '/dashboard/admin/users', icon: Users, label: 'Users' },
@@ -329,17 +329,17 @@ const AppLayout = ({ children }) => {
         <NavLink
           key={item.path}
           to={item.path}
-          className={({ isActive }) => `flex flex-col items-center justify-center gap-1 p-2 rounded-xl no-underline transition-all duration-300 flex-1 max-w-[80px] relative ${isActive ? 'text-amber-400' : 'text-gray-500'}`}
+          className={({ isActive }) => `flex flex-col items-center justify-center gap-1 p-2 rounded-xl no-underline transition-all duration-300 flex-1 max-w-[80px] relative ${isActive ? 'text-[var(--casino-green)]' : 'text-gray-500'}`}
         >
           {({ isActive }) => (
             <>
               {isActive && (
-                <span className="absolute inset-0 bg-amber-500/10 rounded-xl" />
+                <span className="absolute inset-0 bg-[var(--casino-green)]/10 rounded-xl" />
               )}
-              <span className={`relative z-10 p-1.5 rounded-lg ${isActive ? 'bg-amber-500/20' : ''} transition-all`}>
-                <item.icon size={22} className={isActive ? 'drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]' : ''} />
+              <span className={`relative z-10 p-1.5 rounded-lg ${isActive ? 'bg-[var(--casino-green)]/20' : ''} transition-all`}>
+                <item.icon size={22} className={isActive ? 'drop-shadow-[0_0_8px_rgba(0,255,157,0.5)]' : ''} />
               </span>
-              <span className={`relative z-10 text-[10px] font-bold ${isActive ? 'text-amber-400' : ''}`}>{item.label}</span>
+              <span className={`relative z-10 text-[10px] font-bold ${isActive ? 'text-[var(--casino-green)]' : ''}`}>{item.label}</span>
             </>
           )}
         </NavLink>
@@ -349,7 +349,7 @@ const AppLayout = ({ children }) => {
 
   // Mobile Bottom Nav - User
   const UserBottomNav = () => (
-    <nav className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-black via-slate-900/95 to-slate-900/90 backdrop-blur-xl border-t border-pink-500/20 px-2 py-2 flex justify-around items-center z-50 lg:hidden shadow-[0_-10px_40px_rgba(236,72,153,0.15)]">
+    <nav className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-black via-[var(--casino-dark)]/95 to-[var(--casino-dark)]/90 backdrop-blur-xl border-t border-[var(--casino-green)]/20 px-2 py-2 flex justify-around items-center z-50 lg:hidden shadow-[0_-10px_40px_rgba(0,255,157,0.1)]">
       {[
         { path: '/', icon: Home, label: 'Home', exact: true },
         { path: '/dashboard/games', icon: Gamepad2, label: 'Games' },
@@ -361,17 +361,17 @@ const AppLayout = ({ children }) => {
           key={item.path}
           to={item.path}
           end={item.exact}
-          className={({ isActive }) => `flex flex-col items-center justify-center gap-1 p-2 rounded-xl no-underline transition-all duration-300 flex-1 max-w-[72px] relative ${isActive ? 'text-pink-400' : 'text-gray-500'}`}
+          className={({ isActive }) => `flex flex-col items-center justify-center gap-1 p-2 rounded-xl no-underline transition-all duration-300 flex-1 max-w-[72px] relative ${isActive ? 'text-[var(--casino-green)]' : 'text-gray-500'}`}
         >
           {({ isActive }) => (
             <>
               {isActive && (
-                <span className="absolute inset-0 bg-gradient-to-t from-pink-500/10 to-transparent rounded-xl" />
+                <span className="absolute inset-0 bg-gradient-to-t from-[var(--casino-green)]/10 to-transparent rounded-xl" />
               )}
-              <span className={`relative z-10 p-1.5 rounded-lg ${isActive ? 'bg-pink-500/20' : ''} transition-all`}>
-                <item.icon size={24} className={isActive ? 'drop-shadow-[0_0_8px_rgba(236,72,153,0.5)]' : ''} />
+              <span className={`relative z-10 p-1.5 rounded-lg ${isActive ? 'bg-[var(--casino-green)]/20' : ''} transition-all`}>
+                <item.icon size={24} className={isActive ? 'drop-shadow-[0_0_8px_rgba(0,255,157,0.5)]' : ''} />
               </span>
-              <span className={`relative z-10 text-[10px] font-bold ${isActive ? 'text-pink-400' : ''}`}>{item.label}</span>
+              <span className={`relative z-10 text-[10px] font-bold ${isActive ? 'text-[var(--casino-green)]' : ''}`}>{item.label}</span>
             </>
           )}
         </NavLink>
@@ -380,21 +380,21 @@ const AppLayout = ({ children }) => {
   );
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black">
+    <div className="flex min-h-screen bg-[var(--casino-dark)]">
       {isAdmin ? <AdminSidebar /> : <UserSidebar />}
 
       <div className="flex-1 lg:ml-[280px] flex flex-col min-h-screen w-0">
         {/* Premium Header with Live Winners Ticker */}
         <header className="sticky top-0 z-30">
           {/* Main Header Bar */}
-          <div className="bg-gradient-to-b from-black/90 to-black/80 backdrop-blur-xl border-b border-white/10 px-4 py-3">
+          <div className="bg-gradient-to-b from-[var(--casino-dark)]/90 to-[var(--casino-dark)]/80 backdrop-blur-xl border-b border-white/10 px-4 py-3">
             <div className="flex items-center justify-between gap-4">
               {/* Logo - Mobile Only */}
               <div 
-                className={`flex items-center gap-2 lg:hidden ${isAdmin ? 'text-amber-400' : 'bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent'}`}
+                className={`flex items-center gap-2 lg:hidden ${isAdmin ? 'text-[var(--casino-green)]' : 'text-[var(--casino-green)]'}`}
                 onClick={() => navigate(currentHomeItem.path)}
               >
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isAdmin ? 'bg-amber-500' : 'bg-gradient-to-br from-pink-500 to-purple-600'}`}>
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isAdmin ? 'bg-[var(--casino-green)]' : 'bg-gradient-to-br from-[var(--casino-green)] to-emerald-600'}`}>
                   {isAdmin ? <Shield size={16} color="white" /> : <Crown size={16} color="white" />}
                 </div>
                 <span className="font-bold">{isAdmin ? 'Admin' : 'IndiaPlay'}</span>
@@ -402,9 +402,9 @@ const AppLayout = ({ children }) => {
 
               {/* Balance - Logged in Users */}
               {user && !isAdmin && (
-                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-pink-500/10 to-purple-500/10 rounded-lg border border-pink-500/20 backdrop-blur-sm">
-                  <Wallet size={14} className="text-pink-400" />
-                  <span className="font-bold text-sm bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-[var(--casino-green)]/10 to-[var(--casino-purple)]/10 rounded-lg border border-[var(--casino-green)]/20 backdrop-blur-sm">
+                  <Wallet size={14} className="text-[var(--casino-green)]" />
+                  <span className="font-bold text-sm text-[var(--casino-green)]">
                     {formatCurrency(user?.balance)}
                   </span>
                 </div>
@@ -419,7 +419,7 @@ const AppLayout = ({ children }) => {
                   <>
                     {/* Deposit Button */}
                     <motion.button
-                      className="hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 text-white font-bold text-xs shadow-lg shadow-emerald-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-emerald-500/30"
+                      className="hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r from-[var(--casino-green)] to-emerald-600 text-black font-bold text-xs shadow-lg shadow-green-500/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-green-500/40"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => navigate('/dashboard/deposit')}
@@ -430,11 +430,11 @@ const AppLayout = ({ children }) => {
 
                     {/* Mobile Deposit Icon */}
                     <motion.button
-                      className="sm:hidden w-10 h-10 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 flex items-center justify-center shadow-lg shadow-emerald-500/20"
+                      className="sm:hidden w-10 h-10 rounded-xl bg-gradient-to-r from-[var(--casino-green)] to-emerald-600 flex items-center justify-center shadow-lg shadow-green-500/30"
                       whileTap={{ scale: 0.95 }}
                       onClick={() => navigate('/dashboard/deposit')}
                     >
-                      <Coins size={18} className="text-white" />
+                      <Coins size={18} className="text-black" />
                     </motion.button>
 
                     {/* Notification Bell */}
@@ -442,7 +442,7 @@ const AppLayout = ({ children }) => {
 
                     {/* Profile Avatar */}
                     <motion.div
-                      className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-base cursor-pointer shadow-lg transition-all duration-300 hover:scale-105 ${isAdmin ? 'bg-gradient-to-br from-amber-500 to-orange-600 shadow-amber-500/20' : 'bg-gradient-to-br from-pink-500 to-purple-600 shadow-pink-500/20'}`}
+                      className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-base cursor-pointer shadow-lg transition-all duration-300 hover:scale-105 ${isAdmin ? 'bg-gradient-to-br from-[var(--casino-green)] to-emerald-600 shadow-green-500/20' : 'bg-gradient-to-br from-[var(--casino-green)] to-emerald-600 shadow-green-500/20'}`}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => navigate('/dashboard/profile')}
@@ -460,7 +460,7 @@ const AppLayout = ({ children }) => {
                       Sign Up
                     </motion.button>
                     <motion.button 
-                      className="py-2.5 px-5 rounded-xl font-semibold text-sm cursor-pointer bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg shadow-pink-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-pink-500/30"
+                      className="py-2.5 px-5 rounded-xl font-semibold text-sm cursor-pointer bg-gradient-to-r from-[var(--casino-green)] to-emerald-600 text-black shadow-lg shadow-green-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-green-500/30"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => navigate('/login')}
@@ -475,11 +475,11 @@ const AppLayout = ({ children }) => {
 
           {/* Premium Recent Winners Ticker */}
           {!isAdmin && (
-            <div className="relative overflow-hidden bg-gradient-to-r from-purple-950/20 via-black/90 to-purple-950/20 border-b border-white/[0.05] z-20">
+            <div className="relative overflow-hidden bg-gradient-to-r from-[var(--casino-purple)]/10 via-[var(--casino-dark)]/90 to-[var(--casino-purple)]/10 border-b border-white/[0.05] z-20">
               {/* Section Title */}
               <div className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 z-20 hidden md:flex items-center gap-3">
                 <div className="flex items-center gap-2">
-                  <Trophy size={18} className="text-amber-400" />
+                  <Trophy size={18} className="text-[var(--casino-green)]" />
                   <span className="text-white/90 font-bold text-sm tracking-wide">Recent Winners</span>
                 </div>
                 <div className="h-8 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
@@ -521,7 +521,7 @@ const AppLayout = ({ children }) => {
                             
                             {/* Amount */}
                             <div className="flex items-center gap-1.5 ml-2 pl-3 border-l border-white/10">
-                              <span className="text-emerald-400 font-black text-base tracking-tight">
+                              <span className="text-[var(--casino-green)] font-black text-base tracking-tight">
                                 ₹{winner.amount.toLocaleString()}
                               </span>
                             </div>

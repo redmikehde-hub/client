@@ -24,6 +24,18 @@
   --color-text-muted: #6b7280;
   --color-border: #2d2d4a;
   --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Casino Theme Variables */
+  --casino-dark: #0a0a14;
+  --casino-dark-2: #0f172a;
+  --casino-dark-3: #1a1a2e;
+  --casino-green: #00ff9d;
+  --casino-green-dark: #00cc7d;
+  --casino-orange: #ff9500;
+  --casino-purple: #a855f7;
+  --casino-blue: #3b82f6;
+  --casino-red: #ef4444;
+  --casino-yellow: #eab308;
 }
 
 html {

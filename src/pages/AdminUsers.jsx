@@ -72,11 +72,11 @@ const AdminUsers = () => {
   const getRoleBadge = (role) => {
     switch (role) {
       case 'SUPER_ADMIN':
-        return <span className="px-2 py-1 rounded-lg text-[10px] font-bold uppercase bg-amber-500/20 text-amber-400">Super Admin</span>;
+        return <span className="px-2 py-1 rounded-lg text-[10px] font-bold uppercase bg-[var(--casino-green)]/20 text-[var(--casino-green)]">Super Admin</span>;
       case 'SUB_ADMIN':
-        return <span className="px-2 py-1 rounded-lg text-[10px] font-bold uppercase bg-orange-500/20 text-orange-400">Sub Admin</span>;
+        return <span className="px-2 py-1 rounded-lg text-[10px] font-bold uppercase bg-[var(--casino-orange)]/20 text-[var(--casino-orange)]">Sub Admin</span>;
       default:
-        return <span className="px-2 py-1 rounded-lg text-[10px] font-bold uppercase bg-blue-500/20 text-blue-400">User</span>;
+        return <span className="px-2 py-1 rounded-lg text-[10px] font-bold uppercase bg-[var(--casino-purple)]/20 text-[var(--casino-purple)]">User</span>;
     }
   };
 
@@ -183,7 +183,7 @@ const AdminUsers = () => {
 
                 <div className="grid grid-cols-2 gap-2 mb-3">
                   <div className="p-2 bg-black/20 rounded-lg text-center">
-                    <div className="text-sm font-bold text-emerald-400">{formatCurrency(u.balance)}</div>
+                    <div className="text-sm font-bold text-[var(--casino-green)]">{formatCurrency(u.balance)}</div>
                     <div className="text-[10px] text-gray-500">Balance</div>
                   </div>
                   <div className="p-2 bg-black/20 rounded-lg text-center">
@@ -261,8 +261,8 @@ const AdminUsers = () => {
 
               <div className="grid grid-cols-2 gap-3 mb-6">
                 <div className="p-3 bg-black/20 rounded-xl text-center">
-                  <DollarSign size={18} className="text-emerald-400 mx-auto mb-1" />
-                  <div className="font-bold text-emerald-400">{formatCurrency(selectedUser.balance)}</div>
+                  <DollarSign size={18} className="text-[var(--casino-green)] mx-auto mb-1" />
+                  <div className="font-bold text-[var(--casino-green)]">{formatCurrency(selectedUser.balance)}</div>
                   <div className="text-[10px] text-gray-500">Balance</div>
                 </div>
                 <div className="p-3 bg-black/20 rounded-xl text-center">

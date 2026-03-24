@@ -63,8 +63,8 @@ const AdminSubadmins = () => {
   if (!isSuperAdmin) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh]">
-        <div className="w-20 h-20 rounded-2xl bg-amber-500/20 flex items-center justify-center mb-6">
-          <Shield size={40} className="text-amber-400" />
+        <div className="w-20 h-20 rounded-2xl bg-[var(--casino-green)]/20 flex items-center justify-center mb-6">
+          <Shield size={40} className="text-[var(--casino-green)]" />
         </div>
         <h2 className="text-xl font-bold text-white mb-2">Access Denied</h2>
         <p className="text-sm text-gray-400">Only Super Admins can manage sub-admins</p>
@@ -90,7 +90,7 @@ const AdminSubadmins = () => {
             <RefreshCw size={18} className={loading ? 'animate-spin' : ''} />
           </motion.button>
           <motion.button
-            className="px-4 py-2.5 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-lg shadow-amber-500/30 flex items-center gap-2 transition-all"
+            className="px-4 py-2.5 rounded-xl font-bold text-sm bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-orange)] text-white shadow-lg shadow-[var(--casino-green)]/30 flex items-center gap-2 transition-all"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => setShowModal(true)}
@@ -102,14 +102,14 @@ const AdminSubadmins = () => {
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-3">
-        <div className="rounded-xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 border border-white/10 p-4 text-center">
-          <Shield size={20} className="mx-auto mb-1 text-amber-400" />
-          <div className="text-xl font-bold text-amber-400">{subadmins.length}</div>
+        <div className="rounded-xl bg-gradient-to-br from-[var(--casino-green)]/20 to-[var(--casino-purple)]/20 border border-white/10 p-4 text-center">
+          <Shield size={20} className="mx-auto mb-1 text-[var(--casino-green)]" />
+          <div className="text-xl font-bold text-[var(--casino-green)]">{subadmins.length}</div>
           <div className="text-xs text-gray-400">Sub-Admins</div>
         </div>
-        <div className="rounded-xl bg-gradient-to-br from-emerald-500/20 to-green-500/20 border border-white/10 p-4 text-center">
-          <CheckCircle size={20} className="mx-auto mb-1 text-emerald-400" />
-          <div className="text-xl font-bold text-emerald-400">{subadmins.filter(s => s.isActive !== false).length}</div>
+        <div className="rounded-xl bg-gradient-to-br from-[var(--casino-green)]/20 to-[var(--casino-orange)]/20 border border-white/10 p-4 text-center">
+          <CheckCircle size={20} className="mx-auto mb-1 text-[var(--casino-green)]" />
+          <div className="text-xl font-bold text-[var(--casino-green)]">{subadmins.filter(s => s.isActive !== false).length}</div>
           <div className="text-xs text-gray-400">Active</div>
         </div>
         <div className="rounded-xl bg-gradient-to-br from-gray-500/20 to-gray-600/20 border border-white/10 p-4 text-center">

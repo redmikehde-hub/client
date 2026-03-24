@@ -14,6 +14,15 @@ const predictionLabels = {
   DRAW: 'Draw',
 };
 
+const FallbackLogo = ({ team }) => {
+  const initials = team ? team.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase() : '?';
+  return (
+    <div className="h-full w-full flex items-center justify-center bg-gradient-to-br from-[var(--casino-purple)] to-[var(--casino-orange)] text-white font-black text-xs sm:text-sm">
+      {initials}
+    </div>
+  );
+};
+
 const sportLabels = {
   Cricket: 'Cricket Prediction',
 };
@@ -133,24 +142,24 @@ export default function SportPrediction() {
   }
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(34,197,94,0.12),transparent_28%),radial-gradient(circle_at_top_right,rgba(59,130,246,0.14),transparent_28%),linear-gradient(180deg,#07111f,#0b1222,#071018)] p-2 sm:p-4 overflow-x-hidden">
+    <div className="min-h-screen bg-[var(--casino-dark)] p-2 sm:p-4 overflow-x-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-4 sm:mb-6 gap-2">
           <button onClick={() => navigate('/dashboard/games')} className="p-2 sm:p-3 rounded-xl bg-white/5 border border-white/10 text-white shrink-0">
             <ArrowLeft size={18} />
           </button>
           <div className="text-center min-w-0">
-            <div className="text-[9px] sm:text-[11px] uppercase tracking-[0.35em] text-emerald-300/70">Live Cricket Markets</div>
+            <div className="text-[9px] sm:text-[11px] uppercase tracking-[0.35em] text-[var(--casino-green)]">Live Cricket Markets</div>
             <h1 className="text-xl sm:text-3xl font-black text-white truncate">{game?.name || 'Sport'}</h1>
           </div>
-          <div className="px-2 sm:px-4 py-2 rounded-full bg-white/5 border border-white/10 text-amber-300 font-bold flex items-center gap-1 sm:gap-2 shrink-0 text-xs sm:text-base">
+          <div className="px-2 sm:px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[var(--casino-orange)] font-bold flex items-center gap-1 sm:gap-2 shrink-0 text-xs sm:text-base">
             <Coins size={12} className="sm:size-4" /> {Number(user?.balance || 0).toLocaleString()}
           </div>
         </div>
 
         <div className="mb-3 sm:mb-5 flex items-center justify-between rounded-xl sm:rounded-2xl border border-white/10 bg-white/5 px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-slate-300 backdrop-blur-xl">
           <div className="flex items-center gap-1 sm:gap-2">
-            <Sparkles size={14} className="sm:size-4 text-emerald-300" />
+            <Sparkles size={14} className="sm:size-4 text-[var(--casino-green)]" />
             <span className="hidden xs:inline">Live sports feed</span> {isConnected ? 'connected' : 'reconnecting'}
           </div>
           <div className="text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-slate-500">API + Socket</div>
@@ -162,7 +171,7 @@ export default function SportPrediction() {
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-3 sm:px-4 py-2 rounded-full border text-xs sm:text-sm font-bold transition whitespace-nowrap ${activeCategory === category ? 'bg-gradient-to-r from-emerald-500 to-cyan-500 text-white border-transparent' : 'bg-white/5 text-slate-300 border-white/10'}`}
+                className={`px-3 sm:px-4 py-2 rounded-full border text-xs sm:text-sm font-bold transition whitespace-nowrap ${activeCategory === category ? 'bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-purple)] text-white border-transparent' : 'bg-white/5 text-slate-300 border-white/10'}`}
               >
                 {category === 'ALL' ? 'All Matches' : category}
               </button>
@@ -174,7 +183,7 @@ export default function SportPrediction() {
           <div className="rounded-2xl lg:rounded-[30px] border border-white/10 bg-white/5 backdrop-blur-xl p-3 sm:p-4 order-1">
             <div className="flex items-center justify-between px-2 pb-3">
               <div>
-                <div className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-emerald-300/70">Live Matchboard</div>
+                <div className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-[var(--casino-green)]">Live Matchboard</div>
                 <div className="text-white text-lg sm:text-xl font-black">{activeCategory === 'ALL' ? 'All Cricket Matches' : activeCategory}</div>
               </div>
               <div className="text-xs text-slate-400">{filteredMatches.length} matches</div>
@@ -190,9 +199,9 @@ export default function SportPrediction() {
                 <div className="relative z-10 p-3 sm:p-4 lg:p-5">
                   <div className="flex flex-wrap items-center gap-1 sm:gap-2 mb-3 sm:mb-4">
                     {match.tags.map((tag) => (
-                      <span key={tag} className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-black tracking-[0.15em] sm:tracking-[0.2em] uppercase bg-emerald-400/15 text-emerald-300 border border-emerald-400/20">{tag}</span>
+                      <span key={tag} className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-black tracking-[0.15em] sm:tracking-[0.2em] uppercase bg-[var(--casino-green)]/15 text-[var(--casino-green)] border border-[var(--casino-green)]/20">{tag}</span>
                     ))}
-                    <span className={`px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-black tracking-[0.15em] sm:tracking-[0.2em] uppercase border ${match.status === 'SCHEDULED' ? 'bg-blue-400/15 text-blue-300 border-blue-400/20' : match.status === 'LIVE' ? 'bg-red-400/15 text-red-300 border-red-400/20' : 'bg-white/10 text-slate-200 border-white/10'}`}>{match.status === 'SCHEDULED' ? 'Bet Open' : match.status === 'LIVE' ? 'Match Live' : 'Result Ready'}</span>
+                    <span className={`px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-black tracking-[0.15em] sm:tracking-[0.2em] uppercase border ${match.status === 'SCHEDULED' ? 'bg-[var(--casino-purple)]/15 text-[var(--casino-purple)] border-[var(--casino-purple)]/20' : match.status === 'LIVE' ? 'bg-[var(--casino-orange)]/15 text-[var(--casino-orange)] border-[var(--casino-orange)]/20' : 'bg-white/10 text-slate-200 border-white/10'}`}>{match.status === 'SCHEDULED' ? 'Bet Open' : match.status === 'LIVE' ? 'Match Live' : 'Result Ready'}</span>
                   </div>
 
                   <div className="text-xs sm:text-sm text-slate-400 mb-2 sm:mb-3">{match.league} • {match.sport}</div>
@@ -200,11 +209,14 @@ export default function SportPrediction() {
                   <div className="flex items-center gap-2 sm:gap-4 mb-2 sm:mb-3">
                     <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
                       <div className="h-10 w-10 sm:h-14 sm:w-14 rounded-xl sm:rounded-2xl bg-white/10 border border-white/10 overflow-hidden flex items-center justify-center shrink-0">
-                        <img src={`https://picsum.photos/seed/${match.id}a/100/100`} alt={match.teamA} className="h-full w-full object-cover" />
+                        {match.teamABadge ? (
+                          <img src={match.teamABadge} alt={match.teamA} className="h-full w-full object-contain p-1" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.querySelector('.fallback-logo')?.style?.removeProperty('display'); }} />
+                        ) : null}
+                        <div className={`fallback-logo h-full w-full ${match.teamABadge ? 'hidden' : ''}`}><FallbackLogo team={match.teamA} /></div>
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="text-base sm:text-lg lg:text-xl font-black text-white truncate">{match.teamA}</div>
-                        <div className="text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-emerald-300">Team A</div>
+                        <div className="text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[var(--casino-green)]">Team A</div>
                       </div>
                     </div>
                     <div className="text-center shrink-0 px-2">
@@ -216,10 +228,13 @@ export default function SportPrediction() {
                     <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1 justify-end">
                       <div className="min-w-0 flex-1 text-right">
                         <div className="text-base sm:text-lg lg:text-xl font-black text-white truncate">{match.teamB}</div>
-                        <div className="text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-cyan-300">Team B</div>
+                        <div className="text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[var(--casino-purple)]">Team B</div>
                       </div>
                       <div className="h-10 w-10 sm:h-14 sm:w-14 rounded-xl sm:rounded-2xl bg-white/10 border border-white/10 overflow-hidden flex items-center justify-center shrink-0">
-                        <img src={`https://picsum.photos/seed/${match.id}b/100/100`} alt={match.teamB} className="h-full w-full object-cover" />
+                        {match.teamBBadge ? (
+                          <img src={match.teamBBadge} alt={match.teamB} className="h-full w-full object-contain p-1" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.querySelector('.fallback-logo')?.style?.removeProperty('display'); }} />
+                        ) : null}
+                        <div className={`fallback-logo h-full w-full ${match.teamBBadge ? 'hidden' : ''}`}><FallbackLogo team={match.teamB} /></div>
                       </div>
                     </div>
                   </div>
@@ -232,7 +247,7 @@ export default function SportPrediction() {
 
                   <button
                     onClick={() => { setSelectedMatchId(match.id); setSelectedPrediction(null); }}
-                    className={`w-full px-4 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl font-black text-sm ${selectedMatchId === match.id ? 'bg-gradient-to-r from-emerald-500 to-cyan-500 text-white' : 'bg-white/10 text-white border border-white/10'}`}
+                    className={`w-full px-4 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl font-black text-sm ${selectedMatchId === match.id ? 'bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-purple)] text-white' : 'bg-white/10 text-white border border-white/10'}`}
                   >
                     {selectedMatchId === match.id ? '✓ Selected' : 'Choose Match'}
                   </button>
@@ -247,11 +262,11 @@ export default function SportPrediction() {
                         key={option.key}
                         disabled={match.status !== 'SCHEDULED' || selectedMatchId !== match.id}
                         onClick={() => { setSelectedMatchId(match.id); setSelectedPrediction(option.key); }}
-                        className={`rounded-xl sm:rounded-2xl border p-2 sm:p-3 text-center transition ${selectedPrediction === option.key && selectedMatchId === match.id ? 'border-emerald-400 bg-emerald-400/15' : 'border-white/10 bg-white/5'} ${match.status !== 'SCHEDULED' || selectedMatchId !== match.id ? 'opacity-60 cursor-not-allowed' : ''}`}
+                        className={`rounded-xl sm:rounded-2xl border p-2 sm:p-3 text-center transition ${selectedPrediction === option.key && selectedMatchId === match.id ? 'border-[var(--casino-green)] bg-[var(--casino-green)]/15' : 'border-white/10 bg-white/5'} ${match.status !== 'SCHEDULED' || selectedMatchId !== match.id ? 'opacity-60 cursor-not-allowed' : ''}`}
                       >
                         <div className="text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.25em] text-slate-400">Prediction</div>
                         <div className="mt-1 sm:mt-2 text-xs sm:text-sm font-bold text-white truncate">{option.label}</div>
-                        <div className="mt-0.5 sm:mt-1 text-emerald-300 font-black text-sm sm:text-base">{Number(option.odds).toFixed(2)}x</div>
+                        <div className="mt-0.5 sm:mt-1 text-[var(--casino-green)] font-black text-sm sm:text-base">{Number(option.odds).toFixed(2)}x</div>
                       </button>
                     ))}
                   </div>
@@ -264,7 +279,7 @@ export default function SportPrediction() {
                       </div>
                       <div className="text-right">
                         <div className="text-[10px] sm:text-xs text-slate-400">Status</div>
-                        <div className={`font-black text-sm sm:text-base ${match.myBet.status === 'WIN' ? 'text-emerald-300' : match.myBet.status === 'LOSS' ? 'text-rose-300' : 'text-cyan-300'}`}>{match.myBet.status}</div>
+                        <div className={`font-black text-sm sm:text-base ${match.myBet.status === 'WIN' ? 'text-[var(--casino-green)]' : match.myBet.status === 'LOSS' ? 'text-[var(--casino-orange)]' : 'text-[var(--casino-purple)]'}`}>{match.myBet.status}</div>
                       </div>
                     </div>
                   )}
@@ -294,14 +309,14 @@ export default function SportPrediction() {
               </div>
               <div className="grid grid-cols-5 gap-1 sm:gap-2 mb-3 sm:mb-4">
                 {BET_OPTIONS.map((amount) => (
-                  <button key={amount} onClick={() => setBetAmount(amount)} className={`rounded-lg sm:rounded-xl px-0.5 sm:px-3 py-1.5 sm:py-3 font-bold text-[10px] sm:text-sm ${betAmount === amount ? 'bg-gradient-to-r from-emerald-500 to-cyan-500 text-white' : 'bg-white/5 text-slate-300 border border-white/10'}`}>{amount}</button>
+                  <button key={amount} onClick={() => setBetAmount(amount)} className={`rounded-lg sm:rounded-xl px-0.5 sm:px-3 py-1.5 sm:py-3 font-bold text-[10px] sm:text-sm ${betAmount === amount ? 'bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-purple)] text-white' : 'bg-white/5 text-slate-300 border border-white/10'}`}>{amount}</button>
                 ))}
               </div>
-              <button onClick={handleBet} disabled={placing || !selectedMatch || !selectedPrediction} className="w-full rounded-xl sm:rounded-2xl py-2.5 sm:py-4 font-black text-white bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 disabled:opacity-50 text-xs sm:text-base">
+              <button onClick={handleBet} disabled={placing || !selectedMatch || !selectedPrediction} className="w-full rounded-xl sm:rounded-2xl py-2.5 sm:py-4 font-black text-white bg-gradient-to-r from-[var(--casino-green)] via-[var(--casino-green)] to-[var(--casino-purple)] disabled:opacity-50 text-xs sm:text-base">
                 {placing ? 'Locking...' : `Confirm Bet ${betAmount}`}
               </button>
-              {message && <div className="mt-2 sm:mt-3 rounded-lg sm:rounded-xl bg-emerald-500/10 border border-emerald-500/20 p-2 sm:p-3 text-emerald-300 text-[10px] sm:text-sm">{message}</div>}
-              {error && <div className="mt-2 sm:mt-3 rounded-lg sm:rounded-xl bg-rose-500/10 border border-rose-500/20 p-2 sm:p-3 text-rose-300 text-[10px] sm:text-sm">{error}</div>}
+              {message && <div className="mt-2 sm:mt-3 rounded-lg sm:rounded-xl bg-[var(--casino-green)]/10 border border-[var(--casino-green)]/20 p-2 sm:p-3 text-[var(--casino-green)] text-[10px] sm:text-sm">{message}</div>}
+              {error && <div className="mt-2 sm:mt-3 rounded-lg sm:rounded-xl bg-[var(--casino-orange)]/10 border border-[var(--casino-orange)]/20 p-2 sm:p-3 text-[var(--casino-orange)] text-[10px] sm:text-sm">{error}</div>}
             </div>
 
             <div className="rounded-2xl lg:rounded-[28px] border border-white/10 bg-white/5 p-3 sm:p-5 backdrop-blur-xl max-h-[35vh] lg:max-h-[38vh] overflow-y-auto sport-scroll">
@@ -314,7 +329,7 @@ export default function SportPrediction() {
                       <div className="text-[9px] sm:text-xs text-slate-400">{predictionLabels[bet.prediction] || bet.prediction}</div>
                     </div>
                     <div className="text-right shrink-0">
-                      <div className={`font-black text-[10px] sm:text-base ${bet.status === 'WIN' ? 'text-emerald-300' : bet.status === 'LOSS' ? 'text-rose-300' : 'text-cyan-300'}`}>{bet.status}</div>
+                      <div className={`font-black text-[10px] sm:text-base ${bet.status === 'WIN' ? 'text-[var(--casino-green)]' : bet.status === 'LOSS' ? 'text-[var(--casino-orange)]' : 'text-[var(--casino-purple)]'}`}>{bet.status}</div>
                       <div className="text-[9px] sm:text-xs text-slate-400">{bet.reward > 0 ? `+${bet.reward}` : bet.betAmount}</div>
                     </div>
                   </div>
@@ -331,13 +346,13 @@ export default function SportPrediction() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[80] flex items-center justify-center p-3 sm:p-4">
             <div className="absolute inset-0 bg-black/80 backdrop-blur-xl" onClick={() => setShowTicket(false)} />
             <motion.div initial={{ scale: 0.92, y: 18 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.92, y: 18 }} className="relative w-full max-w-lg rounded-2xl sm:rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,#07111f,#0b1222)] p-4 sm:p-6 shadow-[0_30px_120px_rgba(0,0,0,0.65)]">
-              <div className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] text-emerald-300/70 mb-2">Prediction Locked</div>
+              <div className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] text-[var(--casino-green)] mb-2">Prediction Locked</div>
               <h3 className="text-xl sm:text-3xl font-black text-white mb-3">{ticket.teams}</h3>
               <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-5">
                 <div className="rounded-xl sm:rounded-2xl bg-white/5 p-3 sm:p-4 border border-white/10 text-white text-sm sm:text-base"><strong>{predictionLabels[ticket.prediction]}</strong> at {Number(ticket.odds).toFixed(2)}x</div>
                 <div className="rounded-xl sm:rounded-2xl bg-white/5 p-3 sm:p-4 border border-white/10 text-slate-300 text-xs sm:text-sm">Bet {ticket.betAmount} coins • Match starts {formatTime(ticket.startTime)}</div>
               </div>
-              <button onClick={() => setShowTicket(false)} className="w-full rounded-xl sm:rounded-2xl py-3 sm:py-4 font-black text-white bg-gradient-to-r from-emerald-500 to-cyan-500 text-sm sm:text-base">Done</button>
+              <button onClick={() => setShowTicket(false)} className="w-full rounded-xl sm:rounded-2xl py-3 sm:py-4 font-black text-white bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-purple)] text-sm sm:text-base">Done</button>
             </motion.div>
           </motion.div>
         )}

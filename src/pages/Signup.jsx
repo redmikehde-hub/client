@@ -62,22 +62,22 @@ const Signup = () => {
   };
 
   const benefits = [
-    { icon: Gift, text: 'Welcome Bonus', value: '100 Coins' },
-    { icon: Crown, text: 'Daily Rewards', value: 'Every Day' },
-    { icon: Shield, text: 'Secure Gaming', value: '100% Safe' },
+    { icon: Gift, text: 'Welcome Bonus', value: '100 Coins', color: 'var(--casino-green)' },
+    { icon: Crown, text: 'Daily Rewards', value: 'Every Day', color: 'var(--casino-orange)' },
+    { icon: Shield, text: 'Secure Gaming', value: '100% Safe', color: 'var(--casino-purple)' },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-bg-dark via-purple-950/30 to-bg-dark flex">
+    <div className="min-h-screen bg-gradient-to-br from-[var(--casino-dark)] via-[var(--casino-purple)]/20 to-[var(--casino-dark)] flex">
       <AnimatePresence>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className="absolute inset-0 overflow-hidden pointer-events-none"
         >
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-neon-purple/15 rounded-full blur-3xl" />
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[var(--casino-green)]/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[var(--casino-purple)]/10 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-[var(--casino-orange)]/5 rounded-full blur-3xl" />
         </motion.div>
       </AnimatePresence>
 
@@ -95,7 +95,7 @@ const Signup = () => {
             <span>Back to Home</span>
           </Link>
 
-          <div className="bg-gradient-to-b from-bg-card-hover/80 to-bg-card/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl">
+          <div className="bg-gradient-to-b from-[var(--casino-dark-3)]/80 to-[var(--casino-dark)]/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl">
             <div className="text-center mb-8">
               <motion.div
                 initial={{ scale: 0, rotate: -10 }}
@@ -103,14 +103,14 @@ const Signup = () => {
                 transition={{ type: 'spring', stiffness: 200, delay: 0.1 }}
                 className="relative w-20 h-20 mx-auto mb-4"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary via-neon-purple to-pink-500 rounded-2xl blur-lg opacity-75" />
-                <div className="relative w-full h-full bg-gradient-to-br from-primary via-neon-purple to-pink-500 rounded-2xl flex items-center justify-center shadow-xl">
-                  <Sparkles size={36} className="text-white" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[var(--casino-green)] to-[var(--casino-purple)] rounded-2xl blur-lg opacity-75" />
+                <div className="relative w-full h-full bg-gradient-to-br from-[var(--casino-green)] to-[var(--casino-purple)] rounded-2xl flex items-center justify-center shadow-xl">
+                  <Sparkles size={36} className="text-black" />
                 </div>
               </motion.div>
               
               <h2 className="text-3xl font-black mb-2">
-                <span className="bg-gradient-to-r from-pink-500 via-primary to-neon-purple bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[var(--casino-green)] via-[var(--casino-purple)] to-[var(--casino-orange)] bg-clip-text text-transparent">
                   Create Account
                 </span>
               </h2>
@@ -124,7 +124,7 @@ const Signup = () => {
                 onClick={() => setIsPhone(false)}
                 className={`flex-1 py-3 px-4 rounded-xl font-semibold text-sm cursor-pointer transition-all duration-300 ${
                   !isPhone 
-                    ? 'bg-gradient-to-r from-pink-500 via-primary to-neon-purple text-white shadow-lg shadow-pink-500/30' 
+                    ? 'bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-purple)] text-black shadow-lg shadow-green-500/30' 
                     : 'bg-transparent text-white/50 hover:text-white'
                 }`}
               >
@@ -135,7 +135,7 @@ const Signup = () => {
                 onClick={() => setIsPhone(true)}
                 className={`flex-1 py-3 px-4 rounded-xl font-semibold text-sm cursor-pointer transition-all duration-300 ${
                   isPhone 
-                    ? 'bg-gradient-to-r from-pink-500 via-primary to-neon-purple text-white shadow-lg shadow-pink-500/30' 
+                    ? 'bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-purple)] text-black shadow-lg shadow-green-500/30' 
                     : 'bg-transparent text-white/50 hover:text-white'
                 }`}
               >
@@ -155,7 +155,7 @@ const Signup = () => {
                   <input
                     type="text"
                     placeholder="Enter your name"
-                    className="w-full py-4 pl-12 pr-4 bg-black/40 border-2 border-white/10 rounded-2xl text-white placeholder:text-white/30 focus:outline-none focus:border-pink-500 transition-all"
+                    className="w-full py-4 pl-12 pr-4 bg-black/40 border-2 border-white/10 rounded-2xl text-white placeholder:text-white/30 focus:outline-none focus:border-[var(--casino-green)] transition-all"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
@@ -175,7 +175,7 @@ const Signup = () => {
                     <input
                       type="email"
                       placeholder="Enter your email"
-                      className="w-full py-4 pl-12 pr-4 bg-black/40 border-2 border-white/10 rounded-2xl text-white placeholder:text-white/30 focus:outline-none focus:border-pink-500 transition-all"
+                      className="w-full py-4 pl-12 pr-4 bg-black/40 border-2 border-white/10 rounded-2xl text-white placeholder:text-white/30 focus:outline-none focus:border-[var(--casino-green)] transition-all"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       autoComplete="email"
@@ -195,7 +195,7 @@ const Signup = () => {
                     <input
                       type="tel"
                       placeholder="Enter your phone"
-                      className="w-full py-4 pl-12 pr-4 bg-black/40 border-2 border-white/10 rounded-2xl text-white placeholder:text-white/30 focus:outline-none focus:border-pink-500 transition-all"
+                      className="w-full py-4 pl-12 pr-4 bg-black/40 border-2 border-white/10 rounded-2xl text-white placeholder:text-white/30 focus:outline-none focus:border-[var(--casino-green)] transition-all"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       autoComplete="tel"
@@ -216,7 +216,7 @@ const Signup = () => {
                   <input
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Create a password"
-                    className="w-full py-4 pl-12 pr-12 bg-black/40 border-2 border-white/10 rounded-2xl text-white placeholder:text-white/30 focus:outline-none focus:border-pink-500 transition-all"
+                    className="w-full py-4 pl-12 pr-12 bg-black/40 border-2 border-white/10 rounded-2xl text-white placeholder:text-white/30 focus:outline-none focus:border-[var(--casino-green)] transition-all"
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                     required
@@ -242,7 +242,7 @@ const Signup = () => {
                   <input
                     type={showConfirmPassword ? 'text' : 'password'}
                     placeholder="Confirm your password"
-                    className="w-full py-4 pl-12 pr-12 bg-black/40 border-2 border-white/10 rounded-2xl text-white placeholder:text-white/30 focus:outline-none focus:border-pink-500 transition-all"
+                    className="w-full py-4 pl-12 pr-12 bg-black/40 border-2 border-white/10 rounded-2xl text-white placeholder:text-white/30 focus:outline-none focus:border-[var(--casino-green)] transition-all"
                     value={formData.confirmPassword}
                     onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                     required
@@ -270,7 +270,7 @@ const Signup = () => {
                   <input
                     type="text"
                     placeholder="Enter referral code"
-                    className="w-full py-4 pl-12 pr-4 bg-black/40 border-2 border-white/10 rounded-2xl text-white placeholder:text-white/30 focus:outline-none focus:border-pink-500 transition-all font-bold uppercase tracking-wider"
+                    className="w-full py-4 pl-12 pr-4 bg-black/40 border-2 border-white/10 rounded-2xl text-white placeholder:text-white/30 focus:outline-none focus:border-[var(--casino-green)] transition-all font-bold uppercase tracking-wider"
                     value={formData.referralCode}
                     onChange={(e) => setFormData({ ...formData, referralCode: e.target.value.toUpperCase() })}
                   />
@@ -280,12 +280,12 @@ const Signup = () => {
               <motion.button
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 mt-2 rounded-2xl bg-gradient-to-r from-pink-500 via-primary to-neon-purple text-white text-base font-bold shadow-xl shadow-pink-500/30 flex items-center justify-center gap-2 transition-all hover:shadow-2xl hover:shadow-pink-500/50 disabled:opacity-50"
+                className="w-full py-4 mt-2 rounded-2xl bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-purple)] text-black text-base font-bold shadow-xl shadow-green-500/30 flex items-center justify-center gap-2 transition-all hover:shadow-2xl hover:shadow-green-500/50 disabled:opacity-50"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
                 {loading ? (
-                  <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  <div className="w-6 h-6 border-2 border-black/30 border-t-black rounded-full animate-spin" />
                 ) : (
                   <>
                     <Sparkles size={18} />
@@ -315,7 +315,7 @@ const Signup = () => {
 
             <p className="text-center mt-6 text-white/50">
               Already have an account?{' '}
-              <Link to="/login" className="text-pink-500 font-bold hover:text-primary transition-colors">
+              <Link to="/login" className="text-[var(--casino-green)] font-bold hover:text-[var(--casino-purple)] transition-colors">
                 Sign In
               </Link>
             </p>
@@ -328,7 +328,7 @@ const Signup = () => {
       </div>
 
       <div className="hidden lg:flex lg:w-1/2 relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-pink-500/30 via-primary/20 to-neon-purple/30" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--casino-green)]/10 via-[var(--casino-purple)]/10 to-[var(--casino-orange)]/10" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,rgba(0,0,0,0.4)_100%)]" />
         
         <div className="relative z-10 flex flex-col justify-center items-center w-full p-12">
@@ -339,14 +339,14 @@ const Signup = () => {
             className="text-center max-w-md"
           >
             <div className="relative mb-8">
-              <div className="absolute inset-0 bg-gradient-to-r from-pink-500/30 to-neon-purple/30 blur-3xl rounded-full" />
-              <div className="relative w-28 h-28 mx-auto bg-gradient-to-br from-pink-500 via-primary to-neon-purple rounded-3xl flex items-center justify-center shadow-2xl">
-                <Gift size={56} className="text-white" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[var(--casino-green)]/20 to-[var(--casino-purple)]/20 blur-3xl rounded-full" />
+              <div className="relative w-28 h-28 mx-auto bg-gradient-to-br from-[var(--casino-green)] to-[var(--casino-purple)] rounded-3xl flex items-center justify-center shadow-2xl shadow-green-500/30">
+                <Gift size={56} className="text-black" />
               </div>
             </div>
             
             <h1 className="text-4xl font-black mb-4">
-              <span className="bg-gradient-to-r from-pink-400 via-primary to-neon-purple bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-white via-[var(--casino-green)] to-white bg-clip-text text-transparent">
                 Get Started
               </span>
             </h1>
@@ -362,14 +362,17 @@ const Signup = () => {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.5 + index * 0.1 }}
-                  className="flex items-center gap-4 p-5 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-pink-500/30 transition-all"
+                  className="flex items-center gap-4 p-5 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-[var(--casino-green)]/30 transition-all"
                 >
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500/30 to-neon-purple/30 flex items-center justify-center shrink-0">
-                    <benefit.icon size={28} className="text-pink-400" />
+                  <div 
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: `${benefit.color}20` }}
+                  >
+                    <benefit.icon size={28} style={{ color: benefit.color }} />
                   </div>
                   <div className="text-left">
                     <span className="text-white font-bold block">{benefit.text}</span>
-                    <span className="text-pink-400 font-semibold text-sm">{benefit.value}</span>
+                    <span className="font-semibold text-sm" style={{ color: benefit.color }}>{benefit.value}</span>
                   </div>
                 </motion.div>
               ))}
@@ -379,13 +382,13 @@ const Signup = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9 }}
-              className="mt-12 p-6 rounded-2xl bg-gradient-to-r from-pink-500/10 to-primary/10 border border-pink-500/20"
+              className="mt-12 p-6 rounded-2xl bg-gradient-to-r from-[var(--casino-green)]/10 to-[var(--casino-purple)]/10 border border-[var(--casino-green)]/20"
             >
               <div className="flex items-center justify-center gap-2 mb-2">
-                <Trophy size={20} className="text-gold" />
+                <Trophy size={20} className="text-[var(--casino-orange)]" />
                 <span className="text-white font-bold">Exclusive Welcome Offer</span>
               </div>
-              <p className="text-3xl font-black bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
+              <p className="text-3xl font-black bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-orange)] bg-clip-text text-transparent">
                 +100 Bonus Coins
               </p>
               <p className="text-white/50 text-sm mt-2">On your first deposit!</p>
@@ -401,7 +404,7 @@ const Signup = () => {
             {[...Array(5)].map((_, i) => (
               <motion.div
                 key={i}
-                className="w-2 h-2 rounded-full bg-pink-500/50"
+                className="w-2 h-2 rounded-full bg-[var(--casino-green)]/50"
                 animate={{ opacity: [0.3, 1, 0.3], scale: [1, 1.2, 1] }}
                 transition={{ delay: i * 0.2, duration: 2, repeat: Infinity }}
               />

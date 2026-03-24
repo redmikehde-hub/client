@@ -105,7 +105,7 @@ const AdminBroadcast = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <h1 className="text-2xl sm:text-3xl font-black bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent mb-2">
+        <h1 className="text-2xl sm:text-3xl font-black bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-orange)] bg-clip-text text-transparent mb-2">
           Send Broadcast
         </h1>
         <p className="text-gray-400">Send notifications to all users instantly</p>
@@ -154,7 +154,7 @@ const AdminBroadcast = () => {
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
               placeholder="Enter notification title"
-              className="w-full px-4 py-3.5 bg-black/30 border-2 border-white/10 rounded-xl text-white placeholder:text-gray-500 focus:outline-none focus:border-amber-500 transition-all"
+              className="w-full px-4 py-3.5 bg-black/30 border-2 border-white/10 rounded-xl text-white placeholder:text-gray-500 focus:outline-none focus:border-[var(--casino-green)] transition-all"
               maxLength={100}
             />
           </div>
@@ -165,7 +165,7 @@ const AdminBroadcast = () => {
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               placeholder="Enter notification message"
-              className="w-full px-4 py-3.5 bg-black/30 border-2 border-white/10 rounded-xl text-white placeholder:text-gray-500 focus:outline-none focus:border-amber-500 transition-all resize-none"
+              className="w-full px-4 py-3.5 bg-black/30 border-2 border-white/10 rounded-xl text-white placeholder:text-gray-500 focus:outline-none focus:border-[var(--casino-green)] transition-all resize-none"
               rows={4}
               maxLength={500}
             />
@@ -207,7 +207,7 @@ const AdminBroadcast = () => {
 
           <motion.button
             type="submit"
-            className="w-full py-4 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold text-base shadow-lg shadow-amber-500/30 flex items-center justify-center gap-3 disabled:opacity-50"
+            className="w-full py-4 rounded-xl bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-orange)] text-white font-bold text-base shadow-lg shadow-[var(--casino-green)]/30 flex items-center justify-center gap-3 disabled:opacity-50"
             disabled={sending}
             whileHover={{ scale: sending ? 1 : 1.02 }}
             whileTap={{ scale: sending ? 1 : 0.98 }}
@@ -232,7 +232,7 @@ const AdminBroadcast = () => {
           className="rounded-3xl bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-white/10 p-6"
         >
           <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-            <Bell size={20} className="text-amber-400" />
+            <Bell size={20} className="text-[var(--casino-green)]" />
             Recent Broadcasts
           </h3>
           <div className="space-y-3">

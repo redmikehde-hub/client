@@ -111,13 +111,13 @@ const Referral = () => {
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="relative overflow-hidden rounded-3xl p-6 mb-8 bg-gradient-to-br from-emerald-500/10 via-teal-500/10 to-cyan-500/10 border border-emerald-500/20"
+        className="relative overflow-hidden rounded-3xl p-6 mb-8 bg-gradient-to-br from-[var(--casino-green)]/10 via-[var(--casino-purple)]/10 to-[var(--casino-orange)]/10 border border-[var(--casino-green)]/20"
       >
-        <div className="absolute -top-20 -right-20 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl" />
+        <div className="absolute -top-20 -right-20 w-40 h-40 bg-[var(--casino-green)]/10 rounded-full blur-3xl" />
         
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--casino-green)] to-[var(--casino-purple)] flex items-center justify-center shadow-lg shadow-[var(--casino-green)]/30">
               <Users className="text-white" size={28} />
             </div>
             <div>
@@ -127,14 +127,14 @@ const Referral = () => {
           </div>
 
           <div className="p-4 bg-black/30 rounded-2xl mb-4">
-            <p className="text-3xl font-black text-center tracking-wider text-emerald-400">
+            <p className="text-3xl font-black text-center tracking-wider text-[var(--casino-green)]">
               {referralData?.referralCode || 'Loading...'}
             </p>
           </div>
 
           <div className="flex gap-3">
             <motion.button
-              className="flex-1 py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/30"
+              className="flex-1 py-4 rounded-xl bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-purple)] text-white font-bold flex items-center justify-center gap-2 shadow-lg shadow-[var(--casino-green)]/30"
               whileTap={{ scale: 0.95 }}
               onClick={copyCode}
             >

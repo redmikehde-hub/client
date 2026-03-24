@@ -12,25 +12,25 @@ const WelcomePopup = ({ onClose, onExplore }) => {
       icon: Gift, 
       title: 'Welcome Bonus', 
       desc: 'Get ₹50 free on signup!',
-      color: 'from-pink-500 to-rose-500'
+      color: 'from-[var(--casino-green)] to-[var(--casino-purple)]'
     },
     { 
       icon: Gamepad2, 
       title: 'Exciting Games', 
       desc: 'Play Ludo, Teen Patti & more!',
-      color: 'from-purple-500 to-indigo-500'
+      color: 'from-[var(--casino-purple)] to-[var(--casino-green)]'
     },
     { 
       icon: Wallet, 
       title: 'Instant Withdrawals', 
       desc: 'Withdraw winnings instantly',
-      color: 'from-emerald-500 to-green-500'
+      color: 'from-[var(--casino-green)] to-[var(--casino-orange)]'
     },
     { 
       icon: Trophy, 
       title: 'Daily Rewards', 
       desc: 'Login daily for bonuses!',
-      color: 'from-amber-500 to-orange-500'
+      color: 'from-[var(--casino-orange)] to-[var(--casino-purple)]'
     },
   ];
 
@@ -46,11 +46,11 @@ const WelcomePopup = ({ onClose, onExplore }) => {
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.9, opacity: 0, y: 20 }}
         transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-        className="relative w-full max-w-md bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-purple-500/20"
+        className="relative w-full max-w-md bg-gradient-to-br from-[var(--casino-dark)] via-[var(--casino-dark)] to-[var(--casino-dark-2)] rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-[var(--casino-green)]/20"
       >
         {/* Glow Effects */}
-        <div className="absolute -top-20 -left-20 w-40 h-40 bg-gradient-to-br from-pink-500/30 to-purple-500/30 rounded-full blur-3xl" />
-        <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-gradient-to-br from-indigo-500/30 to-purple-500/30 rounded-full blur-3xl" />
+        <div className="absolute -top-20 -left-20 w-40 h-40 bg-gradient-to-br from-[var(--casino-green)]/30 to-[var(--casino-purple)]/30 rounded-full blur-3xl" />
+        <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-gradient-to-br from-[var(--casino-orange)]/30 to-[var(--casino-green)]/30 rounded-full blur-3xl" />
         
         {/* Close Button */}
         <button
@@ -66,7 +66,7 @@ const WelcomePopup = ({ onClose, onExplore }) => {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-            className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 flex items-center justify-center shadow-xl shadow-purple-500/40"
+            className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[var(--casino-green)] via-[var(--casino-purple)] to-[var(--casino-orange)] flex items-center justify-center shadow-xl shadow-[var(--casino-green)]/40"
           >
             <Sparkles className="text-white w-10 h-10" />
           </motion.div>
@@ -78,7 +78,7 @@ const WelcomePopup = ({ onClose, onExplore }) => {
             className="text-2xl sm:text-3xl font-bold text-white mb-2"
           >
             Welcome to{' '}
-            <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[var(--casino-green)] via-[var(--casino-purple)] to-[var(--casino-orange)] bg-clip-text text-transparent">
               IndiaPlay
             </span>
           </motion.h2>
@@ -119,9 +119,9 @@ const WelcomePopup = ({ onClose, onExplore }) => {
 
         {/* Premium Badge */}
         <div className="px-6 pb-4">
-          <div className="flex items-center justify-center gap-2 py-2 px-4 bg-gradient-to-r from-amber-500/10 to-orange-500/10 rounded-xl border border-amber-500/20">
-            <Star className="w-4 h-4 text-amber-400" />
-            <span className="text-xs text-amber-400 font-medium">Premium Gaming Experience</span>
+          <div className="flex items-center justify-center gap-2 py-2 px-4 bg-gradient-to-r from-[var(--casino-green)]/10 to-[var(--casino-purple)]/10 rounded-xl border border-[var(--casino-green)]/20">
+            <Star className="w-4 h-4 text-[var(--casino-green)]" />
+            <span className="text-xs text-[var(--casino-green)] font-medium">Premium Gaming Experience</span>
           </div>
         </div>
 
@@ -138,7 +138,7 @@ const WelcomePopup = ({ onClose, onExplore }) => {
               onClick={onExplore}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="flex-1 py-3.5 px-4 rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-purple-500/30 flex items-center justify-center gap-2"
+              className="flex-1 py-3.5 px-4 rounded-xl bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-purple)] text-white font-semibold text-sm transition-all shadow-lg shadow-[var(--casino-green)]/30 flex items-center justify-center gap-2"
             >
               Explore Games
               <ArrowRight size={16} />

@@ -80,14 +80,14 @@ const Bonus = () => {
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="relative overflow-hidden rounded-3xl p-6 mb-8 bg-gradient-to-br from-amber-500/10 via-orange-500/10 to-red-500/10 border border-amber-500/20"
+        className="relative overflow-hidden rounded-3xl p-6 mb-8 bg-gradient-to-br from-[var(--casino-green)]/10 via-[var(--casino-orange)]/10 to-[var(--casino-purple)]/10 border border-[var(--casino-green)]/20"
       >
-        <div className="absolute -top-20 -right-20 w-40 h-40 bg-amber-500/10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-orange-500/10 rounded-full blur-3xl" />
+        <div className="absolute -top-20 -right-20 w-40 h-40 bg-[var(--casino-green)]/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-[var(--casino-orange)]/10 rounded-full blur-3xl" />
         
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg shadow-amber-500/30">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--casino-green)] to-[var(--casino-orange)] flex items-center justify-center shadow-lg shadow-[var(--casino-green)]/30">
               <Gift className="text-white" size={28} />
             </div>
             <div>
@@ -103,12 +103,12 @@ const Bonus = () => {
                 placeholder="Enter bonus code"
                 value={code}
                 onChange={(e) => setCode(e.target.value.toUpperCase())}
-                className="flex-1 py-4 px-4 bg-black/30 border-2 border-white/10 rounded-xl text-white font-bold uppercase tracking-wider text-center focus:outline-none focus:border-amber-500 transition-all"
+                className="flex-1 py-4 px-4 bg-black/30 border-2 border-white/10 rounded-xl text-white font-bold uppercase tracking-wider text-center focus:outline-none focus:border-[var(--casino-green)] transition-all"
                 disabled={loading}
               />
               <motion.button
                 type="submit"
-                className="px-6 py-4 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold flex items-center gap-2 shadow-lg shadow-amber-500/30 disabled:opacity-50"
+                className="px-6 py-4 rounded-xl bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-orange)] text-white font-bold flex items-center gap-2 shadow-lg shadow-[var(--casino-green)]/30 disabled:opacity-50"
                 whileTap={{ scale: 0.95 }}
                 disabled={loading || !code.trim()}
               >
@@ -142,7 +142,7 @@ const Bonus = () => {
               className="p-4 rounded-2xl bg-bg-card-hover border border-white/5 flex items-center justify-between"
             >
               <div>
-                <p className="font-bold text-amber-400">{item.code}</p>
+                <p className="font-bold text-[var(--casino-green)]">{item.code}</p>
                 <p className="text-sm text-text-muted">{item.desc}</p>
               </div>
               <div className="text-right">

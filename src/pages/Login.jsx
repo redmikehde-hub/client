@@ -48,21 +48,21 @@ const Login = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-bg-dark via-purple-950/30 to-bg-dark flex">
+    <div className="min-h-screen bg-gradient-to-br from-[var(--casino-dark)] via-[var(--casino-purple)]/20 to-[var(--casino-dark)] flex">
       <AnimatePresence>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className="absolute inset-0 overflow-hidden pointer-events-none"
         >
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-neon-purple/20 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl" />
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[var(--casino-green)]/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[var(--casino-purple)]/10 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-[var(--casino-orange)]/5 rounded-full blur-3xl" />
         </motion.div>
       </AnimatePresence>
 
       <div className="hidden lg:flex lg:w-1/2 relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-neon-purple/20 to-pink-500/30" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--casino-green)]/10 via-[var(--casino-purple)]/10 to-[var(--casino-orange)]/10" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,rgba(0,0,0,0.4)_100%)]" />
         
         <div className="relative z-10 flex flex-col justify-center items-center w-full p-12">
@@ -72,12 +72,12 @@ const Login = () => {
             transition={{ delay: 0.3 }}
             className="text-center max-w-md"
           >
-            <div className="w-24 h-24 mx-auto mb-8 bg-gradient-to-br from-primary via-neon-purple to-pink-500 rounded-3xl flex items-center justify-center shadow-2xl shadow-primary/50">
-              <Trophy size={48} className="text-white" />
+            <div className="w-24 h-24 mx-auto mb-8 bg-gradient-to-br from-[var(--casino-green)] to-[var(--casino-purple)] rounded-3xl flex items-center justify-center shadow-2xl shadow-green-500/30">
+              <Trophy size={48} className="text-black" />
             </div>
             
             <h1 className="text-4xl font-black mb-4">
-              <span className="bg-gradient-to-r from-white via-pink-200 to-white bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-white via-[var(--casino-green)] to-white bg-clip-text text-transparent">
                 Welcome Back
               </span>
             </h1>
@@ -95,8 +95,8 @@ const Login = () => {
                   transition={{ delay: 0.5 + index * 0.1 }}
                   className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/30 to-neon-purple/30 flex items-center justify-center">
-                    <feature.icon size={24} className="text-primary" />
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--casino-green)]/20 to-[var(--casino-purple)]/20 flex items-center justify-center">
+                    <feature.icon size={24} className="text-[var(--casino-green)]" />
                   </div>
                   <span className="text-white font-semibold">{feature.text}</span>
                 </motion.div>
@@ -113,7 +113,7 @@ const Login = () => {
             {[...Array(5)].map((_, i) => (
               <motion.div
                 key={i}
-                className="w-2 h-2 rounded-full bg-primary/50"
+                className="w-2 h-2 rounded-full bg-[var(--casino-green)]/50"
                 animate={{ opacity: [0.3, 1, 0.3], scale: [1, 1.2, 1] }}
                 transition={{ delay: i * 0.2, duration: 2, repeat: Infinity }}
               />
@@ -136,19 +136,19 @@ const Login = () => {
             <span>Back to Home</span>
           </Link>
 
-          <div className="bg-gradient-to-b from-bg-card-hover/80 to-bg-card/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl">
+          <div className="bg-gradient-to-b from-[var(--casino-dark-3)]/80 to-[var(--casino-dark)]/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl">
             <div className="text-center mb-8">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ type: 'spring', stiffness: 200 }}
-                className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-primary to-neon-purple rounded-2xl flex items-center justify-center shadow-xl shadow-primary/40"
+                className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-[var(--casino-green)] to-[var(--casino-purple)] rounded-2xl flex items-center justify-center shadow-xl shadow-green-500/30"
               >
-                <Trophy size={32} className="text-white" />
+                <Trophy size={32} className="text-black" />
               </motion.div>
               
               <h2 className="text-3xl font-black mb-2">
-                <span className="bg-gradient-to-r from-primary via-neon-purple to-pink-500 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[var(--casino-green)] via-[var(--casino-purple)] to-[var(--casino-orange)] bg-clip-text text-transparent">
                   Sign In
                 </span>
               </h2>
@@ -162,7 +162,7 @@ const Login = () => {
                 onClick={() => setIsPhone(false)}
                 className={`flex-1 py-3 px-4 rounded-xl font-semibold text-sm cursor-pointer transition-all duration-300 ${
                   !isPhone 
-                    ? 'bg-gradient-to-r from-primary to-neon-purple text-white shadow-lg shadow-primary/30' 
+                    ? 'bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-purple)] text-black shadow-lg shadow-green-500/30' 
                     : 'bg-transparent text-white/50 hover:text-white'
                 }`}
               >
@@ -173,7 +173,7 @@ const Login = () => {
                 onClick={() => setIsPhone(true)}
                 className={`flex-1 py-3 px-4 rounded-xl font-semibold text-sm cursor-pointer transition-all duration-300 ${
                   isPhone 
-                    ? 'bg-gradient-to-r from-primary to-neon-purple text-white shadow-lg shadow-primary/30' 
+                    ? 'bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-purple)] text-black shadow-lg shadow-green-500/30' 
                     : 'bg-transparent text-white/50 hover:text-white'
                 }`}
               >
@@ -194,7 +194,7 @@ const Login = () => {
                     <input
                       type="email"
                       placeholder="Enter your email"
-                      className="w-full py-4 pl-12 pr-4 bg-black/40 border-2 border-white/10 rounded-2xl text-white placeholder:text-white/30 focus:outline-none focus:border-primary transition-all"
+                      className="w-full py-4 pl-12 pr-4 bg-black/40 border-2 border-white/10 rounded-2xl text-white placeholder:text-white/30 focus:outline-none focus:border-[var(--casino-green)] transition-all"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       autoComplete="email"
@@ -214,7 +214,7 @@ const Login = () => {
                     <input
                       type="tel"
                       placeholder="Enter your phone"
-                      className="w-full py-4 pl-12 pr-4 bg-black/40 border-2 border-white/10 rounded-2xl text-white placeholder:text-white/30 focus:outline-none focus:border-primary transition-all"
+                      className="w-full py-4 pl-12 pr-4 bg-black/40 border-2 border-white/10 rounded-2xl text-white placeholder:text-white/30 focus:outline-none focus:border-[var(--casino-green)] transition-all"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       autoComplete="tel"
@@ -235,7 +235,7 @@ const Login = () => {
                   <input
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Enter your password"
-                    className="w-full py-4 pl-12 pr-12 bg-black/40 border-2 border-white/10 rounded-2xl text-white placeholder:text-white/30 focus:outline-none focus:border-primary transition-all"
+                    className="w-full py-4 pl-12 pr-12 bg-black/40 border-2 border-white/10 rounded-2xl text-white placeholder:text-white/30 focus:outline-none focus:border-[var(--casino-green)] transition-all"
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                     required
@@ -256,7 +256,7 @@ const Login = () => {
                 transition={{ delay: 0.3 }}
                 className="flex items-center justify-end"
               >
-                <button type="button" className="text-sm text-primary hover:text-pink-400 transition-colors">
+                <button type="button" className="text-sm text-[var(--casino-green)] hover:text-[var(--casino-purple)] transition-colors">
                   Forgot Password?
                 </button>
               </motion.div>
@@ -264,12 +264,12 @@ const Login = () => {
               <motion.button
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 rounded-2xl bg-gradient-to-r from-primary via-neon-purple to-pink-500 text-white text-base font-bold shadow-xl shadow-primary/30 flex items-center justify-center gap-2 transition-all hover:shadow-2xl hover:shadow-primary/50 disabled:opacity-50"
+                className="w-full py-4 rounded-2xl bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-purple)] text-black text-base font-bold shadow-xl shadow-green-500/30 flex items-center justify-center gap-2 transition-all hover:shadow-2xl hover:shadow-green-500/50 disabled:opacity-50"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
                 {loading ? (
-                  <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  <div className="w-6 h-6 border-2 border-black/30 border-t-black rounded-full animate-spin" />
                 ) : (
                   <>
                     Sign In
@@ -299,7 +299,7 @@ const Login = () => {
 
             <p className="text-center mt-6 text-white/50">
               Don't have an account?{' '}
-              <Link to="/signup" className="text-primary font-bold hover:text-pink-400 transition-colors">
+              <Link to="/signup" className="text-[var(--casino-green)] font-bold hover:text-[var(--casino-purple)] transition-colors">
                 Create Account
               </Link>
             </p>

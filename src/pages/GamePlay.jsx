@@ -286,8 +286,8 @@ const GamePlay = () => {
                       key={color}
                       className={`py-8 rounded-2xl font-bold text-lg capitalize transition-all duration-300 ${
                         selectedOption === color
-                          ? `${color === 'red' ? 'bg-red-500' : color === 'green' ? 'bg-green-500' : 'bg-blue-500'} text-white shadow-lg scale-105`
-                          : `${color === 'red' ? 'bg-red-500/20 text-red-400 border border-red-500/30' : color === 'green' ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-blue-500/20 text-blue-400 border border-blue-500/30'}`
+                          ? `${color === 'red' ? 'bg-[var(--casino-orange)]' : color === 'green' ? 'bg-[var(--casino-green)]' : 'bg-[var(--casino-purple)]'} text-white shadow-lg scale-105`
+                          : `${color === 'red' ? 'bg-[var(--casino-orange)]/20 text-[var(--casino-orange)] border border-[var(--casino-orange)]/30' : color === 'green' ? 'bg-[var(--casino-green)]/20 text-[var(--casino-green)] border border-[var(--casino-green)]/30' : 'bg-[var(--casino-purple)]/20 text-[var(--casino-purple)] border border-[var(--casino-purple)]/30'}`
                       }`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
@@ -352,7 +352,7 @@ const GamePlay = () => {
                     <motion.button
                       className={`py-4 rounded-xl font-bold text-lg transition-all duration-300 ${
                         selectedOption === 'even'
-                          ? 'bg-gradient-to-r from-success to-emerald-600 text-white shadow-lg'
+                          ? 'bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-green)] text-white shadow-lg'
                           : 'bg-white/5 text-text-secondary border border-white/10'
                       }`}
                       whileTap={{ scale: 0.98 }}
@@ -402,7 +402,7 @@ const GamePlay = () => {
             className={`w-full py-5 rounded-2xl font-bold text-lg cursor-pointer shadow-lg transition-all duration-300 flex items-center justify-center gap-3 ${
               isPlaying || (needsSelection && !selectedOption) || betAmount < (game?.minBet || 10)
                 ? 'bg-gray-500/50 cursor-not-allowed'
-                : 'bg-gradient-to-r from-success to-emerald-600 text-white shadow-success/30 hover:shadow-success/50'
+                : 'bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-green)] text-white shadow-[var(--casino-green)]/30 hover:shadow-[var(--casino-green)]/50'
             }`}
             disabled={isPlaying || (needsSelection && !selectedOption) || betAmount < (game?.minBet || 10)}
             whileHover={!isPlaying && (!needsSelection || selectedOption) ? { scale: 1.02 } : {}}
@@ -440,14 +440,14 @@ const GamePlay = () => {
               className="relative w-full max-w-4xl overflow-hidden rounded-[32px] border border-white/10 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.12),transparent_30%),radial-gradient(circle_at_top_right,rgba(168,85,247,0.14),transparent_30%),linear-gradient(180deg,#0f172a,#020617)] p-6 shadow-[0_30px_120px_rgba(0,0,0,0.6)]"
             >
               <div className="absolute inset-0 opacity-60">
-                <div className="absolute -left-8 top-10 h-40 w-40 rounded-full bg-cyan-400/10 blur-3xl" />
-                <div className="absolute -right-10 bottom-6 h-44 w-44 rounded-full bg-fuchsia-500/10 blur-3xl" />
+                <div className="absolute -left-8 top-10 h-40 w-40 rounded-full bg-[var(--casino-green)]/10 blur-3xl" />
+                <div className="absolute -right-10 bottom-6 h-44 w-44 rounded-full bg-[var(--casino-purple)]/10 blur-3xl" />
               </div>
 
               <div className="relative z-10">
                 <div className="mb-6 flex items-center justify-between">
                   <div>
-                    <div className="text-[11px] uppercase tracking-[0.35em] text-cyan-300/70">Live Game</div>
+                    <div className="text-[11px] uppercase tracking-[0.35em] text-[var(--casino-green)]/70">Live Game</div>
                     <h3 className="text-2xl font-black text-white">{game?.name} Arena</h3>
                   </div>
                   <button
@@ -463,10 +463,10 @@ const GamePlay = () => {
                   <div className="rounded-[28px] border border-white/10 bg-white/5 p-6">
                     <div className="mb-4 flex items-center justify-between text-sm text-slate-300">
                       <span>{popupPhase === 'arming' ? 'Preparing round' : popupPhase === 'running' ? 'Game live' : popupPhase === 'result' ? 'Result ready' : 'Game state'}</span>
-                      <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-cyan-200">Bet {formatCurrency(betAmount)}</span>
+                      <span className="rounded-full border border-[var(--casino-green)]/20 bg-[var(--casino-green)]/10 px-3 py-1 text-[var(--casino-green)]">Bet {formatCurrency(betAmount)}</span>
                     </div>
 
-                    <div className={`mb-5 flex min-h-[220px] flex-col items-center justify-center rounded-[24px] border text-center ${popupPhase === 'result' && gameResult?.isWin ? 'border-emerald-400/30 bg-emerald-400/10' : popupPhase === 'result' ? 'border-rose-400/30 bg-rose-400/10' : 'border-white/10 bg-slate-950/40'}`}>
+                     <div className={`mb-5 flex min-h-[220px] flex-col items-center justify-center rounded-[24px] border text-center ${popupPhase === 'result' && gameResult?.isWin ? 'border-[var(--casino-green)]/30 bg-[var(--casino-green)]/10' : popupPhase === 'result' ? 'border-[var(--casino-orange)]/30 bg-[var(--casino-orange)]/10' : 'border-white/10 bg-slate-950/40'}`}>
                       <motion.div
                         key={`${popupPhase}-${popupValue}`}
                         initial={{ scale: 0.9, opacity: 0.5 }}
@@ -474,7 +474,7 @@ const GamePlay = () => {
                         className="px-6"
                       >
                         <div className="mb-4 text-6xl">{popupPhase === 'result' ? (gameResult?.isWin ? '🏆' : '💥') : game?.name === 'Aviator' ? '🚀' : game?.name === 'Colour' ? '🎯' : game?.name === 'Sport' ? '🏟️' : '🎮'}</div>
-                        <div className={`text-[12px] uppercase tracking-[0.4em] ${popupPhase === 'result' && gameResult?.isWin ? 'text-emerald-300' : popupPhase === 'result' ? 'text-rose-300' : 'text-cyan-300/70'}`}>
+                        <div className={`text-[12px] uppercase tracking-[0.4em] ${popupPhase === 'result' && gameResult?.isWin ? 'text-[var(--casino-green)]' : popupPhase === 'result' ? 'text-[var(--casino-orange)]' : 'text-[var(--casino-green)]/70'}`}>
                           {popupPhase === 'arming' ? 'Loading' : popupPhase === 'running' ? 'Playing' : popupPhase === 'result' ? 'Finished' : 'Ready'}
                         </div>
                         <div className="mt-4 text-5xl font-black text-white md:text-6xl">{popupValue || game?.name}</div>
@@ -511,7 +511,7 @@ const GamePlay = () => {
                     {popupPhase === 'result' && (
                       <div className="mt-auto flex gap-3">
                         <button
-                          className="flex-1 rounded-2xl bg-gradient-to-r from-cyan-500 to-fuchsia-500 px-4 py-3 font-bold text-white"
+                          className="flex-1 rounded-2xl bg-gradient-to-r from-[var(--casino-green)] to-[var(--casino-purple)] px-4 py-3 font-bold text-white"
                           onClick={resetGame}
                         >
                           Play Again

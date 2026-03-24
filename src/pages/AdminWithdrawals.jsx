@@ -60,11 +60,11 @@ const AdminWithdrawals = () => {
   const getStatusBadge = (status) => {
     switch (status) {
       case 'PENDING':
-        return <span className="px-3 py-1 rounded-lg text-xs font-bold uppercase bg-amber-500/20 text-amber-400 flex items-center gap-1.5"><Clock size={12} /> Pending</span>;
+        return <span className="px-3 py-1 rounded-lg text-xs font-bold uppercase bg-[var(--casino-orange)]/20 text-[var(--casino-orange)] flex items-center gap-1.5"><Clock size={12} /> Pending</span>;
       case 'APPROVED':
-        return <span className="px-3 py-1 rounded-lg text-xs font-bold uppercase bg-emerald-500/20 text-emerald-400 flex items-center gap-1.5"><CheckCircle size={12} /> Approved</span>;
+        return <span className="px-3 py-1 rounded-lg text-xs font-bold uppercase bg-[var(--casino-green)]/20 text-[var(--casino-green)] flex items-center gap-1.5"><CheckCircle size={12} /> Approved</span>;
       case 'REJECTED':
-        return <span className="px-3 py-1 rounded-lg text-xs font-bold uppercase bg-red-500/20 text-red-400 flex items-center gap-1.5"><XCircle size={12} /> Rejected</span>;
+        return <span className="px-3 py-1 rounded-lg text-xs font-bold uppercase bg-[var(--casino-orange)]/20 text-[var(--casino-orange)] flex items-center gap-1.5"><XCircle size={12} /> Rejected</span>;
       default:
         return <span className="px-3 py-1 rounded-lg text-xs font-bold uppercase bg-gray-500/20 text-gray-400">{status}</span>;
     }
@@ -97,9 +97,9 @@ const AdminWithdrawals = () => {
       {/* Stats */}
       <div className="grid grid-cols-3 gap-3">
         {[
-          { label: 'Pending', value: stats.pending, color: 'amber', icon: Clock, bg: 'from-amber-500/20 to-orange-500/20' },
-          { label: 'Approved', value: stats.approved, color: 'emerald', icon: CheckCircle, bg: 'from-emerald-500/20 to-green-500/20' },
-          { label: 'Rejected', value: stats.rejected, color: 'red', icon: XCircle, bg: 'from-red-500/20 to-pink-500/20' },
+          { label: 'Pending', value: stats.pending, color: 'orange', icon: Clock, bg: 'from-[var(--casino-orange)]/20 to-[var(--casino-purple)]/20' },
+          { label: 'Approved', value: stats.approved, color: 'green', icon: CheckCircle, bg: 'from-[var(--casino-green)]/20 to-[var(--casino-orange)]/20' },
+          { label: 'Rejected', value: stats.rejected, color: 'orange', icon: XCircle, bg: 'from-[var(--casino-orange)]/20 to-[var(--casino-purple)]/20' },
         ].map((stat) => (
           <div key={stat.label} className={`rounded-xl bg-gradient-to-br ${stat.bg} border border-white/10 p-3 text-center`}>
             <stat.icon size={18} className={`mx-auto mb-1 text-${stat.color}-400`} />

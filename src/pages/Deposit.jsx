@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { depositPlanService } from '../services/api';
 import toast from 'react-hot-toast';
+import { SkeletonCard } from '../components/premium';
 
 const Deposit = () => {
   const { user, fetchUser } = useAuth();
@@ -84,8 +85,8 @@ const Deposit = () => {
       </div>
 
       {loading ? (
-        <div className="flex justify-center py-12">
-          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        <div className="grid grid-cols-2 gap-4">
+          {[1, 2, 3, 4].map(i => <SkeletonCard key={i} hasButton />)}
         </div>
       ) : (
         <div className="grid grid-cols-2 gap-4">

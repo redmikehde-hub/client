@@ -164,7 +164,7 @@ const AdminBonusCodes = () => {
 
       {loading ? (
         <div className="flex justify-center py-12">
-          <Loader2 className="w-8 h-8 animate-spin text-amber-500" />
+          <Loader2 className="w-8 h-8 animate-spin text-[var(--casino-green)]" />
         </div>
       ) : (
         <div className="bg-gray-900/50 border border-white/10 rounded-2xl overflow-hidden">
@@ -172,15 +172,15 @@ const AdminBonusCodes = () => {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-white/10">
-                  <th className="text-left p-4 text-xs font-bold text-amber-400 uppercase">Code</th>
-                  <th className="text-left p-4 text-xs font-bold text-amber-400 uppercase">Coins</th>
-                  <th className="text-left p-4 text-xs font-bold text-amber-400 uppercase">Discount</th>
-                  <th className="text-left p-4 text-xs font-bold text-amber-400 uppercase">Min Deposit</th>
-                  <th className="text-left p-4 text-xs font-bold text-amber-400 uppercase">Starts</th>
-                  <th className="text-left p-4 text-xs font-bold text-amber-400 uppercase">Expires</th>
-                  <th className="text-left p-4 text-xs font-bold text-amber-400 uppercase">Uses</th>
-                  <th className="text-left p-4 text-xs font-bold text-amber-400 uppercase">Status</th>
-                  <th className="text-right p-4 text-xs font-bold text-amber-400 uppercase">Actions</th>
+                  <th className="text-left p-4 text-xs font-bold text-[var(--casino-green)] uppercase">Code</th>
+                  <th className="text-left p-4 text-xs font-bold text-[var(--casino-green)] uppercase">Coins</th>
+                  <th className="text-left p-4 text-xs font-bold text-[var(--casino-green)] uppercase">Discount</th>
+                  <th className="text-left p-4 text-xs font-bold text-[var(--casino-green)] uppercase">Min Deposit</th>
+                  <th className="text-left p-4 text-xs font-bold text-[var(--casino-green)] uppercase">Starts</th>
+                  <th className="text-left p-4 text-xs font-bold text-[var(--casino-green)] uppercase">Expires</th>
+                  <th className="text-left p-4 text-xs font-bold text-[var(--casino-green)] uppercase">Uses</th>
+                  <th className="text-left p-4 text-xs font-bold text-[var(--casino-green)] uppercase">Status</th>
+                  <th className="text-right p-4 text-xs font-bold text-[var(--casino-green)] uppercase">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -315,7 +315,7 @@ const AdminBonusCodes = () => {
             >
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-bold flex items-center gap-2">
-                  <Gift className="text-amber-500" size={24} />
+                  <Gift className="text-[var(--casino-green)]" size={24} />
                   {editingCode ? 'Edit Bonus Code' : 'Create Bonus Code'}
                 </h2>
                 <button
